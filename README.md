@@ -31,7 +31,7 @@
     ```
 
     点击下方http://127.0.0.1:8000/即可进入主页啦~
-
+    ![image](https://github.com/DengChenlong-Studio/RUC_insManagement/blob/master/readme_img/launch.png)
 
 
 
@@ -41,7 +41,7 @@
 ### 3.1. E-R图
 
 本项目的设计中主要有学生、老师、管理员三种角色，他们的关系可以由以下E-R图来展示：
-
+![image](https://github.com/DengChenlong-Studio/RUC_insManagement/blob/master/readme_img/er_pic.png)
 
 
 ### 3.2. 登录控制
