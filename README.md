@@ -27,6 +27,7 @@
 - **轻松上手：进入目标文件夹，执行python manage.py runserver即可运行**
 
   - ```python
+    cd RUC_insManagement
     python manage.py runserver	
     ```
 
