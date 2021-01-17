@@ -1,0 +1,67 @@
+<div id="add_app_dialog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="exampleModalLabel" style="float: left;">填写预约信息</h4>
+            </div>
+            <div class="modal-body">
+
+                <form>
+                    <label>预约备注:</label>
+                    <div class="form-group">
+                        <label class="sr-only" for="app_comment">预约备注:</label>
+                        <input type="text" class="form-control" id="app_comment" placeholder="请输入预约备注">
+                    </div>
+                    <div>
+                        选择预约日期：<br>
+                        <input id="app_date" type="date" value="2020-11-15"><br>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="time" id="check8" value="8">8:00-9:00<br>
+                        <input type="checkbox" name="time" id="check9" value="9">9:00-10:00<br>
+                        <input type="checkbox" name="time" id="check10" value="10">10:00-11:00<br>
+                        <input type="checkbox" name="time" id="check11" value="11">11:00-12:00<br>
+                        <input type="checkbox" name="time" id="check12" value="12">12:00-13:00<br>
+                        <input type="checkbox" name="time" id="check13" value="13">13:00-14:00<br>
+                        <input type="checkbox" name="time" id="check14" value="14">14:00-15:00<br>
+                        <input type="checkbox" name="time" id="check15" value="15">15:00-16:00<br>
+                        <input type="checkbox" name="time" id="check16" value="16">16:00-17:00<br>
+                        <input type="checkbox" name="time" id="check17" value="17">17:00-18:00<br>
+                        <input type="checkbox" name="time" id="check18" value="18">18:00-19:00<br>
+                        <input type="checkbox" name="time" id="check19" value="19">19:00-20:00<br>
+                        <input type="checkbox" name="time" id="check20" value="20">20:00-21:00<br>
+                        <input type="checkbox" name="time" id="check21" value="21">21:00-22:00<br>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="tijiao">提交</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="drop_ext_model" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Drop Extractor</h4>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary" onclick="drop_extractor();return false;">OK</button>
+            </div>
+        </div>
+    </div>
+</div>

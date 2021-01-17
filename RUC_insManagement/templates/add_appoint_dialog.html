@@ -1,0 +1,45 @@
+<div id="add_app_dialog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="exampleModalLabel">填写预约信息</h4>
+            </div>
+            <div class="modal-body">
+
+                <form>
+                    <br>
+                    <div class="main_box">
+                        <h3> 预约备注： </h3>
+                      </div>
+                      <br>
+                    <div class="form-group">
+                        <label class="sr-only" for="app_comment">预约备注:</label>
+                        <input type="text" class="form-control" id="app_comment" placeholder="请输入预约备注">
+                    </div>
+                    
+                    <div class="main_box">
+                        <h3> 选择预约日期： </h3>
+                      </div>
+                      <br>
+                    <div>
+                        <input id="app_date" type="date" value="2020-11-15"><br>
+                    </div>
+                    <br>
+                    <div class="main_box">
+                        <h3> 选择时间段 </h3>
+                      </div>
+                      <br>
+                    <div id="demo1" class="xm-select-demo"></div>
+
+                </form>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary btn-danger" id="tijiao" data-dismiss="modal">提交</button>
+            </div>
+        </div>
+    </div>
+</div>

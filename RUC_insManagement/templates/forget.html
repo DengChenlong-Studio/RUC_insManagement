@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<!-- saved from url=(0039)https://v3.bootcss.com/examples/navbar/ -->
+<html lang="zh-CN"><head>
+    {% load static %}
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--<link rel="icon" href="https://v3.bootcss.com/favicon.ico">-->
+
+    <title>忘记密码</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'Navbar_Template_for_Bootstrap_files/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="{% static 'Navbar_Template_for_Bootstrap_files/ie10-viewport-bug-workaround.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'Navbar_Template_for_Bootstrap_files/navbar.css' %}" rel="stylesheet">
+
+
+    <script src="{% static 'Navbar_Template_for_Bootstrap_files/ie-emulation-modes-warning.js.下载' %}"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'Signin Template for Bootstrap_files/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="{% static 'Signin Template for Bootstrap_files/ie10-viewport-bug-workaround.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'Signin Template for Bootstrap_files/signin.css' %}" rel="stylesheet">
+
+
+    <script src="{% static 'Signin Template for Bootstrap_files/ie-emulation-modes-warning.js.下载' %}"></script>
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <!-- Static navbar -->
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../">中国人民大学大型仪器预约管理系统</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <!--
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="https://v3.bootcss.com/examples/navbar/#">Home</a></li>
+              <li><a href="https://v3.bootcss.com/examples/navbar/#">About</a></li>
+              <li><a href="https://v3.bootcss.com/examples/navbar/#">Contact</a></li>
+              <li class="dropdown">
+                <a href="https://v3.bootcss.com/examples/navbar/#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="https://v3.bootcss.com/examples/navbar/#">Action</a></li>
+                  <li><a href="https://v3.bootcss.com/examples/navbar/#">Another action</a></li>
+                  <li><a href="https://v3.bootcss.com/examples/navbar/#">Something else here</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li class="dropdown-header">Nav header</li>
+                  <li><a href="https://v3.bootcss.com/examples/navbar/#">Separated link</a></li>
+                  <li><a href="https://v3.bootcss.com/examples/navbar/#">One more separated link</a></li>
+                </ul>
+              </li>
+            </ul>
+          -->
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="../login">登录 <span class="sr-only">(current)</span></a></li>
+              <li><a href="#">注册</a></li>
+              <li class="active"><a href="../forget">忘记密码</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
+
+      <form class="form-signin">
+        <h2 class="form-signin-heading">忘记密码</h2>
+        <label for="inputName" class="sr-only">姓名</label>
+        <p>姓名<input type="text" id="inputName" class="form-control" placeholder="Name" required=""></p><br>
+        <label for="inputId" class="sr-only">账号</label>
+        <p>账号<input type="text" id="inputId" class="form-control" placeholder="Username" required=""></p><br>
+        <label for="inputPhone" class="sr-only">电话</label>
+        <p>电话<input type="text" id="inputPhone" class="form-control" placeholder="Phonenumber" required=""></p><br>
+        <label for="inputPhone" class="sr-only">学院</label>
+        <p>学院<input type="text" id="inputCollege" class="form-control" placeholder="College" required=""></p><br>
+
+        <button class="btn btn-lg btn-danger btn-block" type="submit">你还是找管理员解决吧</button>
+      </form>
+
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{% static 'Navbar Template for Bootstrap_files/jquery.min.js.下载' %}"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="{% static 'Navbar Template for Bootstrap_files/bootstrap.min.js.下载' %}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{% static 'Navbar Template for Bootstrap_files/ie10-viewport-bug-workaround.js.下载' %}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{% static 'Signin Template for Bootstrap_files/ie10-viewport-bug-workaround.js.下载' %}"></script>
+
+
+</body></html>

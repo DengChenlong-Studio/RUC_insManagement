@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>学生申请加入课题组界面</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <link rel="stylesheet" href="/static/css/font.css">
+    <link rel="stylesheet" href="/static/css/xadmin.css">
+    <script src="/static/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/static/js/xadmin.js"></script>
+    <style>
+    .fakeimg {
+      height: 200px;
+      background: #aaa;
+    }
+
+    .django_img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .main_box h3 {
+      border-left: solid 4px #ae0a29;
+      font-size: 18px;
+      color: #333;
+      line-height: 18px;
+      text-indent: 8px;
+    }
+  </style>
+</head>
+
+<body>
+  <!--<h2>可选课题组</h2><br>-->
+<div class="layui-fluid">
+  <div class="layui-row layui-col-space15">
+      <div class="layui-col-md12">
+          <div class="layui-card">
+              <div class="layui-card-body ">
+
+                <br>
+
+                <div class="main_box">
+                    <h3> 申请加入课题组 </h3>
+                </div>
+                <br>
+                  <form class="layui-form layui-col-space5">
+                      <div class="layui-inline layui-show-xs-block">
+                          <input class="layui-input" autocomplete="off" placeholder="课题组序号" name="start" id="start"></div>
+                      <div class="layui-inline layui-show-xs-block">
+                          <input class="layui-input" autocomplete="off" placeholder="课题" name="end" id="end"></div>
+                      <div class="layui-inline layui-show-xs-block">
+                          <input type="text" name="username" placeholder="课题组名" autocomplete="off" class="layui-input"></div>
+                      <div class="layui-inline layui-show-xs-block">
+                          <button class="layui-btn" lay-submit="" lay-filter="sreach">
+                              <i class="layui-icon">&#xe615;</i></button>
+                      </div>
+                  </form>
+              </div>
+              <!-- 搜索框结束 -->
+
+              <div class="layui-card-body ">
+                  <table class="layui-table" lay-filter="test">
+                      <thead>
+                          <tr>
+                              <th>课题组ID</th>
+                              <th>课题组名称</th>
+                              <th>课题组负责人ID</th>
+                              <th>课题组负责人</th>
+                              <th>操作</th>
+                          </tr>
+                      </thead>
+
+                      <tbody>
+                        {% for g in groups %}
+                        <tr>
+                          <td>{{g.group_id}}</td>
+                          <td>{{g.group_name}}</td>
+                          <td>{{g.leader_id}}</td>
+                          <td>{{ g.name }}</td>
+                          <td>
+                            {% if g.disabled == False %}
+                            <button type="button" class="layui-btn btn-applyfor_group" group_id="{{g.group_id}}">申请加入</button>
+                            {% elif g.disabled == True %}
+                            <button type="button" class="layui-btn layui-btn-disabled btn-applyfor_group" group_id="{{g.group_id}}" disabled>申请加入</button>
+                            {% endif %}
+                          </td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+<script>
+    $(".btn-applyfor_group").click(function(){
+        gid = $(this).attr("group_id")
+        $.ajax({
+            type: "GET",
+            contentType:"application/json;charset=UTF-8",
+            url: "/Student/"+window.location.pathname.match(/\d+/g)+"/submit_application_for_group",
+            data: {groupid: gid},
+            success: function(result){
+                console.log("success!")
+                console.log(result)
+                alert("发起申请成功！")
+                setTimeout(function() {
+                    location.reload();
+                }, 0.1 * 1000);
+            },
+
+            error: function(error){
+                alert('发起申请失败：重复申请')
+                console.log(error.status)
+                console.log(error.responseText)
+            }
+
+        })
+    })
+</script>
+
+</body>
+</html>

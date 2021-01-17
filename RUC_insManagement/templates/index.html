@@ -1,0 +1,428 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% load static %}
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中国人民大学大型仪器预约管理系统</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.carousel').carousel({
+                interval: 5000
+            });
+        });
+    </script>
+    <style>
+	    body{
+
+	    }
+        .header {
+            margin:0;
+            height: 100px;
+            background: #ffffff;
+            border: 0.5px solid #ffffff;
+            border-radius: 0px;
+            padding : 30px;
+            box-shadow: 10px 5px 10px  rgb(0,0, 0, .1);
+        }
+        h1{
+            width: 1500px;
+            height: 40px;
+            margin-top:40px;
+            margin-bottom:30px;
+            font-size: 40px;
+            font-family: Microsoft YaHei, Microsoft YaHei-Normal;
+            font-weight: Normal;
+            text-align: left;
+            color: #777777;
+            line-height: 20px;
+        }
+
+        .loginButton{
+            margin:100px 50px;
+            padding:auto;
+        }
+        /* 设置轮播图css */
+
+        #carousel-example-generic{
+            left:160px;
+            /*
+            width: 1500px;
+            height: 750px;
+            */
+        }
+
+
+
+        .carousel .item {
+            /*
+            height: 500px;
+            width: 1000px;
+             */
+            background-color: #777;
+            /*
+            width: 100%;
+            height: auto;
+            */
+            /*
+            width: 1300px;
+            height: 700px;
+            */
+            /*
+            width: 1500px;
+            height: 750px;
+            */
+        }
+
+
+
+        .carousel-inner > .item > img {
+            /*position: relative;*/
+            top: 0;
+            left: 0;
+            /*1300px*/ /*700px*/
+            /*
+            width: 1500px;
+            height: 750px;
+            */
+
+
+        }
+
+        /* 登录入口的位置 */
+
+        .sign{
+            margin:50px 50px;
+            padding:auto;
+            a:link {background-color:#ffffff;}    /* 未访问链接 */
+            a:visited {background-color:#FFFF85;} /* 已访问链接 */
+        }
+        #cont{
+            margin-left:170px;
+            margin-right:170px;
+        }
+        li > a{
+            color:#000000;
+            font-weight:bold;
+            font-size:18px;
+        }
+        /* 登录红框 */
+        #login_view{
+
+        }
+        
+
+    </style>
+	<!--
+    <style type="text/css">
+        /*首先准备一个放图片的容器*/
+        .container_pic{
+        	float:left;
+            width: 100%;
+            height: 380px;
+            position: relative;
+            top: 10px;
+            //left: 30%;
+            /*border: 1px solid #ccc;*/
+        }
+
+        /*图片样式*/
+        .container_pic img{
+            position: absolute;        /*把所有图片放在同一个位置*/
+            width: 100%;
+            transition-duration: 1s;    /*设置过渡时间*/
+            opacity: 0;                /*把所有图片变透明*/
+        }
+        /*图片显示开关*/
+        .container_pic img.on{
+            opacity: 1;                /*用于显示图片*/
+        }
+
+        /*左右按钮 按钮用图片更好点,这里为了简便就用大于小于号*/
+        .left, .right{
+            position: absolute;
+            top: 30%;
+            width: 60px;
+            height: 100px;
+            line-height: 100px;
+            background-color: #666;
+            opacity: 0.5;
+            text-align: center;
+            font-size: 60px;
+            color: #ccc;
+            display: none;    /*先隐藏按钮*/
+            cursor: pointer;    /*设置鼠标悬停时的样式*/
+        }
+        .left{
+            left: 0;
+        }
+        .right{
+            right: 0;
+        }
+        .container_pic:hover .left, .container_pic:hover .right{
+            display: block;            /*鼠标悬停才容器范围内时显示按钮*/
+        }
+        .left:hover, .right:hover{
+            color: #fff;
+        }
+
+        /*焦点*/
+        .container_pic ul{
+            position: absolute;
+            bottom: 0;
+            max-width: 500px;
+            padding: 5px 200px;
+        }
+        .container_pic ul li{
+            list-style: none;
+            float: left;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-left: 10px;
+            background-color: #ccc;
+            cursor: pointer;
+        }
+        .container_pic ul li.active{
+            background-color: #fff;        /*焦点激活时的样式*/
+        }
+    </style>
+    -->
+</head>
+
+
+
+
+<body onmousemove="func()">
+    <div class="header" style="background: url({% static 'images/header_combine3.png' %});" >
+        <!--
+        <img src="{% static 'images/logo.jpg' %}" style="float:left;" width="250px" height="90px" alt="加载中...">
+        <h1>中国人民大学大型仪器预约管理系统</h1>
+        <img src="{% static 'images/header_word.png' %}" style="margin-top: 15px; margin-left: 50px;" alt="加载中...">
+        -->
+    </div>
+
+<div class="cont">
+    <!--div id="container" style="margin-left:170px;margin-right:170px;">-->
+        <div class="row">
+            <ul class="nav nav-pills nav-justified" style="margin:10px border:1px">
+                <li class="active"><a href="#" style="background-color:#ae0b2a;">首页</a></li>
+                <li><a href="#">平台简介</a></li>
+                <li><a href="#">仪器列表</a></li>
+                <li><a href="#">服务指南</a></li>
+                <li><a href="#">规章制度</a></li>
+                <li><a href="#">联系我们</a></li>
+            </ul>
+        </div>
+	<!--
+    <div class="row">
+    -->
+		<!--
+		<div class="col-md-8 col-lg-8" style="height:380px;">
+	<div class="container_pic" >
+
+        <img class="on" src="{% static 'images/loop1.jpg' %}" />
+        <img src="{% static 'images/loop2.jpg' %}" />
+        <img src="{% static 'images/loop3.jpg' %}" />
+        <img src="{% static 'images/loop4.jpg' %}" />
+
+
+
+        <div class="left"><</div>
+        <div class="right">></div>
+
+
+        <ul>
+            <li class="active"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+
+        </ul>
+    </div>
+		</div>
+        -->
+        
+    <div class="row" >
+        <div class = "col-md-9 col-lg-9 col-xs-9 col-sm-9" style = "margin-top: 0; margin-left: -160px;margin-right: 150px">
+            <!-- 补上轮播图 -->
+
+            <!-- <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="height:500px;width:1000px;margin-top:20px"> -->
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+		    <!-- Indicators -->
+                <ul class="carousel-indicators">
+                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+                </ul>
+                <!-- Wrapper for slides -->
+		        <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+                        <img class="img-responsive" src="/static/images/index/1-2.jpg" alt="加载中..."/>
+                        <div class="carousel-caption">
+                            <h2>中国人民大学大型仪器预约管理系统</h2>
+                            <p>Etelux真空手套箱净化系统</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img class="img-responsive" src="/static/images/index/2.jpg" alt="加载中..."/>
+                        <div class="carousel-caption">
+                            <h2>中国人民大学大型仪器预约管理系统</h2>
+                            <p>瑞典Tobii眼动仪</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img class="img-responsive" src="/static/images/index/3.jpg" alt="加载中..."/>
+                        <div class="carousel-caption">
+                            <h2>中国人民大学大型仪器预约管理系统</h2>
+                            <p>低温超导传感器</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img class="img-responsive" src="/static/images/index/4.jpg" alt="加载中..."/>
+                        <div class="carousel-caption">
+                            <h2>中国人民大学大型仪器预约管理系统</h2>
+                            <p>RAININ移液枪</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Controls -->
+                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+        <!-- 以上为轮播图 -->
+
+		<div class="col-md-3 col-lg-3 col-xs-3 col-sm-3" style = "margin-top: 0;margin-left: -20px;/*margin-bottom: 200px;margin-right: -50px;*/">
+            <div id="login_view" class="panel panel-danger" style="width:107%;height:100%;background-color:#ae0b2a;">
+                <div class="panel-heading" style="background-color:#ae0b2a;">
+                    <h3 class="panel-title" style="color:#ffffff;">仪器预约系统登录</h3>
+                </div>
+                <div class="panel-body" style="background-color:#ae0b2a;">
+                    <!--缺少点击事件-->
+                    <div class="loginButton">
+                        <a target="_blank" href="/logruc"><button type="button" class="btn btn-default" style="width:100%;height:50px;color:#ae0b2a;" id="btn-renda">微人大账号登录</button></a>
+                    </div>
+                    <div class="loginButton">
+                        <!--<a target="_blank" href="/login"><button type="button" class="btn btn-default" style="width:200px;height:50px;color:#ae0b2a;">系统账号登陆</button></a>-->
+                        <a target="_blank" href="/login"><button type="button" class="btn btn-default" style="width:100%;height:50px;color:#ae0b2a;">系统账号登陆</button></a>
+                    </div>
+                    <div class="sign">
+                        <p><b><a href="/sign" target="_blank">没有账号？注册一个</a></b></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+	</div>
+<!--</div>-->
+<!-- </div> -->
+<!-- js部分 -->
+    <script type="text/javascript">
+        window.onresize = function(){
+            $('.col-md-3').css("height",$('.col-md-9').height())
+            $('.col-lg-3').css("height",$('.col-lg-9').height())
+            $('.col-xs-3').css("height",$('.col-xs-9').height())
+            $('.col-sm-3').css("height",$('.col-sm-9').height())
+        }
+
+
+
+        //1、找到container_pic下的所有img标签,li标签,左右按钮
+        var aImgs = document.querySelectorAll('.container_pic img');
+        var aLis = document.querySelectorAll('.container_pic li');
+        var btnLeft = document.querySelector('.container_pic .left');
+        var btnRight = document.querySelector('.container_pic .right');
+
+        // //检验是否找到
+        // console.log(aImgs);
+        // console.log(aLis);
+        // console.log(btnLeft);
+        // console.log(btnRight);
+
+        //点击事件
+        //点击按钮图片切换
+        var index = 0;        //当前图片下标
+        var lastIndex = 0;
+        //拉伸页面时，设置panel和carousel高度相同 hzh modified on 202012081948
+        function func(){
+            $('.col-md-3').css("height",$('.col-md-9').height())
+            $('.col-lg-3').css("height",$('.col-lg-9').height())
+            $('.col-xs-3').css("height",$('.col-xs-9').height())
+            $('.col-sm-3').css("height",$('.col-sm-9').height())
+        }
+        btnRight.onclick = function(){
+            //记录上一张图片的下标
+            lastIndex = index;
+            //清除上一张图片的样式
+            aImgs[lastIndex].className = '';
+            aLis[lastIndex].className = '';
+
+            index++;
+            index %= aImgs.length;    //实现周期性变化
+            //设置当前图片的样式
+            aImgs[index].className = 'on';
+            aLis[index].className = 'active';
+        }
+        //左边按钮类似
+        btnLeft.onclick = function(){
+            //记录上一张图片的下标
+            lastIndex = index;
+            //清除上一张图片的样式
+            aImgs[lastIndex].className = '';
+            aLis[lastIndex].className = '';
+
+            index--;
+            if (index < 0) {
+                index = aImgs.length - 1;
+            }
+            //设置当前图片的样式
+            aImgs[index].className = 'on';
+            aLis[index].className = 'active';
+        }
+    </script>
+    <!--
+    <footer class="footer navbar-fixed-bottom ">
+        <div class="container">
+            <img src="/static/images/header.JPG" style="margin: 0 auto" alt="加载中...">
+        </div>
+    </footer>
+    -->
+    <footer class="panel-footer" style="width: 100%; overflow: hidden; background: url({% static 'images/index/footer.jpg' %});">
+        <div class="container">
+            <div class="row footer-top" style="text-align: center;">
+                <h3 style="color: white;">中国人民大学  |  大型科学仪器共享平台</h3>
+            </div>
+            <hr style="border: 1px  solid #000000;">
+            <div class="row" style="text-align: center;">
+                <div class="col-sm-12 col-md-12 col-lg-12 col-xs-12">
+                    <li style="color:white;"><a href="#" style=" color: white;">数据库大作业全体成员 Copyright</a></li>
+                </div>
+                <!--
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <li style="color:white"><a href="#" style=" color: white;">联系方式</a></li>
+                </div>
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <li style="color:white"><a href="https://v.ruc.edu.cn/" style=" color: white;">旗下网站</a></li>
+                </div>
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <li style="color:white"><a href="#" style=" color: white;">特别致谢</a></li>
+                </div>
+                -->
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

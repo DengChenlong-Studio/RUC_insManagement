@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>{{ins_name}}</title>
+  <!-- import CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/popper.min.js' %}">
+  </script>
+  <script src="{% static 'js/js.cookie.min.js'%}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}">
+  </script>
+  <script src="{% static 'js/ace/ace.js'%}"></script>
+  <script src="{% static 'js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+  <script src="{% static 'js/main_project.js' %}"></script>
+  <script src="{% static 'js/jquery.range-min.js'%}"></script>
+  <style>
+      .is-selected {
+    color: #1989FA;
+  }
+    #app {
+      background-color: #f2f2f2;
+    }
+    
+    .el-col {
+      border-radius: 4px;
+    }
+    .bg-purple-dark {
+      background: #99a9bf;
+    }
+    .bg-purple {
+      background: #d3dce6;
+    }
+    .bg-purple-light {
+      background: #e5e9f2;
+    }
+    .grid-content {
+      border-radius: 4px;
+      min-height: 36px;
+    }
+    .row-bg {
+      padding: 10px 0;
+      background-color: #f9fafc;
+    }
+    .el-header {
+    background-color:  rgb(184, 10, 10);
+    color: #333;
+    line-height: 60px;
+    margin: 10px 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.10);
+  }
+  </style>
+  <style>
+    .el-table .warning-row {
+      background: oldlace;
+    }
+  
+    .el-table .success-row {
+      background: #f0f9eb;
+    }
+    .el-aside {
+      margin: 10px 10px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.10);
+      background-color: #fff;
+    }
+    .el-main{
+      margin: 10px 10px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.10);
+      background-color: #fff;
+    }
+    .aside_item {
+      /*background-color: #F56C6C;*/
+      border-radius: 8px;
+      background-color: #fdefef;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <el-row :gutter="20">
+    <el-col :span="18">
+        <el-calendar>
+            <!-- 这里使用的是 2.5 slot 语法，对于新项目请使用 2.6 slot 语法-->
+            <template
+              slot="dateCell"
+              slot-scope="{date, data}">
+              <p :class="data.isSelected ? 'is-selected' : ''" v-bind:ins="data.day.split('-').slice(1)[1]-0">
+                {% verbatim %}  
+                {{ data.isSelected ? '✔️' : ''}}  {{ data.day.split('-').slice(1)[1]-0 }}日
+                {% endverbatim %}
+                <p v-bind:ins="data.day.split('-').slice(1)[1]-0" class="showhours">
+                
+                </p>
+              </p>
+            </template>
+        </el-calendar>  
+    </el-col>
+  <el-col :span="6">
+        <h2>{{ins_name}}本月一共预约时长：<a id="sumtime"></a></h2>
+        <div>
+          当日预约情况：<br>
+        </div>
+        <div>
+            <input type="checkbox" name="time" id="check8" value="8">8:00-9:00<br>
+            <input type="checkbox" name="time" id="check9" value="9">9:00-10:00<br>
+            <input type="checkbox" name="time" id="check10" value="10">10:00-11:00<br>
+            <input type="checkbox" name="time" id="check11" value="11">11:00-12:00<br>
+            <input type="checkbox" name="time" id="check12" value="12">12:00-13:00<br>
+            <input type="checkbox" name="time" id="check13" value="13">13:00-14:00<br>
+            <input type="checkbox" name="time" id="check14" value="14">14:00-15:00<br>
+            <input type="checkbox" name="time" id="check15" value="15">15:00-16:00<br>
+            <input type="checkbox" name="time" id="check16" value="16">16:00-17:00<br>
+            <input type="checkbox" name="time" id="check17" value="17">17:00-18:00<br>
+            <input type="checkbox" name="time" id="check18" value="18">18:00-19:00<br>
+            <input type="checkbox" name="time" id="check19" value="19">19:00-20:00<br>
+            <input type="checkbox" name="time" id="check20" value="20">20:00-21:00<br>
+            <input type="checkbox" name="time" id="check21" value="21">21:00-22:00<br>
+        </div>
+  </el-col>
+      
+  </el-row>
+</div>
+
+  
+
+</body>
+
+  <!-- import Vue before Element -->
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <!-- import JavaScript -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  
+  
+  <script>
+    new Vue().$mount('#app')
+  </script>
+  <script>
+    $(".prev").css('visibility','hidden');
+    $(".next").css('visibility','hidden');
+
+    
+    $("tr.el-calendar-table__row").each(function(){
+      if($(this).children("td").attr("class") == "current"){
+        console.log($(this).children("td > div > p:nth-child(2)").attr("id"));
+        console.log(1);
+      }
+    })
+
+  </script>
+  <script>
+    console.log({{time_everyday}});
+    var times = {{time_everyday}};
+    console.log(times);
+    
+    $(".showhours").each(function(){
+      var getid = $(this).attr("ins");
+      //console.log(getid);
+      $(this).html("预约时长:"+times[getid]);
+    })
+
+    var sumtime = 0;
+    for (let i = 0; i < 32; i++) {
+      sumtime = sumtime+parseInt(times[i]);
+    }
+    $("#sumtime").html(sumtime);
+  </script>
+</html>

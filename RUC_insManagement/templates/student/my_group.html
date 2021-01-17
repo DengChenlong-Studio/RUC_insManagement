@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>学生申请仪器界面</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <link rel="stylesheet" href="/static/css/font.css">
+    <link rel="stylesheet" href="/static/css/xadmin.css">
+    <script src="/static/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/static/js/xadmin.js"></script>
+    <style>
+    .fakeimg {
+      height: 200px;
+      background: #aaa;
+    }
+
+    .django_img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .main_box h3 {
+      border-left: solid 4px #ae0a29;
+      font-size: 18px;
+      color: #333;
+      line-height: 18px;
+      text-indent: 8px;
+    }
+  </style>
+</head>
+
+<body>
+
+
+<!-- <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>课题组ID</th>
+        <th>课题组名</th>
+        <th>课题</th>
+        <th>负责老师</th>
+        <th>操作</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      {% for g in my_group %}
+      <tr>
+        <td>{{g.group_id}}</td>
+        <td>{{g.group_name}}</td>
+        <td>{{g.topic}}</td>
+        <td>{{g.name}}</td>
+        <td>
+          <button type="button" class="btn btn-danger btn-my_group_info" ins="{{g.group_id}}">详细信息</button>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+</table> -->
+
+<div class="layui-fluid">
+  <div class="layui-row layui-col-space15">
+      <div class="layui-col-md12">
+          <div class="layui-card">
+              <div class="layui-card-body ">
+
+                <br>
+
+                <div class="main_box">
+                  <h3> 我的课题组 </h3>
+                </div>
+                <br>
+                  <form class="layui-form layui-col-space5">
+                      <div class="layui-inline layui-show-xs-block">
+                          <input class="layui-input" autocomplete="off" placeholder="课题组序号" name="start" id="start"></div>
+                      <div class="layui-inline layui-show-xs-block">
+                          <input class="layui-input" autocomplete="off" placeholder="课题" name="end" id="end"></div>
+                      <div class="layui-inline layui-show-xs-block">
+                          <input type="text" name="username" placeholder="课题组名" autocomplete="off" class="layui-input"></div>
+                      <div class="layui-inline layui-show-xs-block">
+                          <button class="layui-btn" lay-submit="" lay-filter="sreach">
+                              <i class="layui-icon">&#xe615;</i></button>
+                      </div>
+                  </form>
+              </div>
+              <!-- 搜索框结束 -->
+
+              <div class="layui-card-body ">
+                  <table class="layui-table" lay-filter="test">
+                      <thead>
+                        <tr>
+                          <th>课题组ID</th>
+                          <th>课题组名</th>
+                          <th>课题</th>
+                          <th>负责老师</th>
+                          <th>操作</th>
+                  
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        {% for g in my_group %}
+                        <tr>
+                          <td>{{g.group_id}}</td>
+                          <td>{{g.group_name}}</td>
+                          <td>{{g.topic}}</td>
+                          <td>{{g.name}}</td>
+                          <td>
+                            <button type="button" class="layui-btn btn-my_group_info" button_of_group="{{g.group_id}}">详细信息</button>
+                          </td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+<br>
+</body>
+
+{% include 'get_group_info.html' %}
+<script>
+  // 查看课题组详细信息
+  function get_group_info(data){
+    //alert("!!!!");
+    $.ajax({
+      type: "GET",
+      contentType: "application/json;charset=UTF-8",
+      url: "/Group/" + data.group_id,
+      data:{
+        group_id: data.group_id,
+      },
+      success:function(result){
+        var tbl = $('#group_info');
+        tbl.empty();
+        //tbl.alert();
+        // 添加数据行
+        for(var i = 0; i < result.length; i++){
+          // 头
+          var s = '<tr>';
+          
+          // 中间
+          s += '<td>' + result[i]['id'] + '</td>';
+          s += '<td>' + result[i]['name'] + '</td>';
+          s += '<td>' + result[i]['school'] + '</td>';
+          s += '<td>' + result[i]['department'] + '</td>';
+          s += '<td>' + result[i]['status'] + '</td>';
+
+          // 尾
+          s += '</tr>';
+
+          tbl.append($(s));
+        }
+        
+        tbl.reset();
+        console.log(result);
+        
+      },
+      error:function(e){
+        console.log(e.status);
+        console.log(e.responseText);
+      }
+    })
+  }
+
+  $(".btn-my_group_info").click(function(){
+    //alert("!!!!");
+    jQuery.noConflict();
+    $('#get_group_info').modal("show");
+    var _group_id = $(this).attr("button_of_group");
+    var data = {group_id: _group_id};
+    get_group_info(data);
+  })
+</script>
+</html>

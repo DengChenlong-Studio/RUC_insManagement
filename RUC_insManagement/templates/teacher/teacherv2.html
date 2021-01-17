@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+<head>
+  <meta charset="UTF-8">
+    <title>{{teacher_name}}</title>
+  <!-- import CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/popper.min.js' %}">
+  </script>
+  <script src="{% static 'js/js.cookie.min.js'%}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}">
+  </script>
+  <script src="{% static 'js/ace/ace.js'%}"></script>
+  <script src="{% static 'js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+  <script src="{% static 'js/main_project.js' %}"></script>
+  <script src="{% static 'js/jquery.range-min.js'%}"></script>
+  <style>
+    #app {
+      background-color: #f2f2f2;
+    }
+    
+    .el-col {
+      border-radius: 4px;
+    }
+    .bg-purple-dark {
+      background: #99a9bf;
+    }
+    .bg-purple {
+      background: #d3dce6;
+    }
+    .bg-purple-light {
+      background: #e5e9f2;
+    }
+    .grid-content {
+      border-radius: 4px;
+      min-height: 36px;
+    }
+    .row-bg {
+      padding: 10px 0;
+      background-color: #f9fafc;
+    }
+    .el-header {
+      background-color: #f2f2f2;
+    /*background-color:  rgb(184, 10, 10);*/
+    color: #333;
+    /*line-height: 60px;*/
+    /*margin: 10px 10px;*/
+    border-radius: 8px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.10);
+  }
+  </style>
+  <style>
+    .el-table .warning-row {
+      background: oldlace;
+    }
+  
+    .el-table .success-row {
+      background: #f0f9eb;
+    }
+    .el-aside {
+      margin: 10px 10px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.10);
+      background-color: #fff;
+    }
+    .el-main{
+      margin: 10px 10px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.10);
+      background-color: #fff;
+    }
+    .aside_item {
+      /*background-color: #F56C6C;*/
+      border-radius: 8px;
+      background-color: #fdefef;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    
+
+    <el-container>
+      <el-header style=" font-size: 12px;background: url({% static 'images/header_back.jpg' %}) ;">
+        <a style="background: url({% static 'images/header_word.png' %}) no-repeat left; display: block; height: 100%; width:660px;float: left;"></a>
+      
+      <span style="color: rgb(0, 0, 0);float:right; margin-top: 20px;">{{teacher_name}}</span>
+        <el-dropdown>
+          <i class="el-icon-setting" style="margin-right: 15px"></i>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item>个人信息</el-dropdown-item>
+            <el-dropdown-item>退出</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+        
+      </el-header>
+
+    <el-container>
+    <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
+        <el-menu :default-openeds="['1','2','3']">
+          <el-submenu index="1">
+            <template slot="title"><i class="el-icon-user"></i>个人信息管理</template>
+  
+              <el-menu-item index="1-1" class="aside_item" id="myinfo"><i class="el-icon-more"></i>个人信息</el-menu-item>
+ 
+          </el-submenu>
+          <el-submenu index="2">
+            <template slot="title"><i class="el-icon-menu"></i>课题组管理</template>
+                         
+              <el-menu-item index="2-1" class="aside_item" id="mygroup"><i class="el-icon-more"></i>我的课题组</el-menu-item>
+              <el-menu-item index="2-2" class="aside_item" id="received_app"><i class="el-icon-more"></i>课题组申请</el-menu-item>
+              <el-menu-item index="2-3" class="aside_item" id="create_group"><i class="el-icon-more"></i>创建课题组</el-menu-item>
+ 
+          </el-submenu>
+          </el-submenu>
+          
+        </el-menu>
+      </el-aside>
+        
+    
+      <el-main>
+        <div id="main_content">
+
+        </div>
+          
+      
+      </el-main>
+      
+     
+  </el-container>
+  </el-container>
+        
+</div>
+  
+
+
+
+</body>
+  <!-- import Vue before Element -->
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <!-- import JavaScript -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script>
+    new Vue({
+      beforeCreate () {
+      document.querySelector('body').setAttribute('style', 'background-color:#f2f2f2')
+      },
+      el: '#app',
+      data: function() {
+        return { visible: false }
+      }
+
+    })
+  </script>
+  <script type="text/javascript">
+    var teacher_name = '{{teacher_name}}'
+    var short_name = '{{short_name}}'
+    var project_id = '{{short_name}}'
+    
+        // 查看自己的课题组列表
+       $("#mygroup").click(function(){
+            $.ajax({
+                url:"/Teacher/"+window.location.pathname.match(/\d+/g)+"/grouplist",
+                data:{},
+                type:'get',
+                datatype:"html",
+                success:function (data) {
+                    $("#main_content").html(data)
+                }
+            })
+        })
+
+       //审核加入课题组
+       $("#received_app").click(function(){
+            $.ajax({
+                url:"/Teacher/"+window.location.pathname.match(/\d+/g)+"/CheckApplyFor_Group/",
+                data:{},
+                type:'get',
+                datatype:"html",
+                success:function (data) {
+                    $("#main_content").html(data)
+                }
+            })
+       })
+
+       // 添加课题组
+       $("#create_group").click(function(){
+            $.ajax({
+                url:"/Teacher/"+window.location.pathname.match(/\d+/g)+"/create_group_html",
+                data:{},
+                type:'get',
+                datatype:"html",
+                success:function (data) {
+                    $("#main_content").html(data)
+                }
+            })
+       })
+
+       //查看个人信息
+       $("#myinfo").click(function(){
+        $.ajax({
+                url:"/Teacher/"+window.location.pathname.match(/\d+/g)+"/getinfo",
+                data:{},
+                type:'get',
+                datatype:"html",
+                success:function (data) {
+                    $("#main_content").html(data)
+                }
+            })
+       })
+</script>
+  
+</html>

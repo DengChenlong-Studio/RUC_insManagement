@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<!-- saved from url=(0039)https://v3.bootcss.com/examples/navbar/ -->
+<html lang="zh-CN"><head>
+    {% load static %}
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--<link rel="icon" href="https://v3.bootcss.com/favicon.ico">-->
+
+    <title>登录</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'Navbar_Template_for_Bootstrap_files/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="{% static 'Navbar_Template_for_Bootstrap_files/ie10-viewport-bug-workaround.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'Navbar_Template_for_Bootstrap_files/navbar.css' %}" rel="stylesheet">
+
+
+    <script src="{% static 'Navbar_Template_for_Bootstrap_files/ie-emulation-modes-warning.js.下载' %}"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'Signin Template for Bootstrap_files/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="{% static 'Signin Template for Bootstrap_files/ie10-viewport-bug-workaround.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'Signin Template for Bootstrap_files/signin.css' %}" rel="stylesheet">
+
+
+    <script src="{% static 'Signin Template for Bootstrap_files/ie-emulation-modes-warning.js.下载' %}"></script>
+
+    <script src="/static/js/jquery.min_2.js"></script>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/plugins/sweetalert/sweetalert.css">
+    <script src="/static/plugins/sweetalert/sweetalert-dev.js"></script>
+    <link rel="stylesheet" href="/static/plugins/verify.js/css/verify.css">
+    <script type="text/javascript" src="/static/plugins/verify.js/js/verify.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+
+      <!-- Static navbar -->
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../">中国人民大学大型仪器预约管理系统</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <!--
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="https://v3.bootcss.com/examples/navbar/#">Home</a></li>
+              <li><a href="https://v3.bootcss.com/examples/navbar/#">About</a></li>
+              <li><a href="https://v3.bootcss.com/examples/navbar/#">Contact</a></li>
+              <li class="dropdown">
+                <a href="https://v3.bootcss.com/examples/navbar/#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="https://v3.bootcss.com/examples/navbar/#">Action</a></li>
+                  <li><a href="https://v3.bootcss.com/examples/navbar/#">Another action</a></li>
+                  <li><a href="https://v3.bootcss.com/examples/navbar/#">Something else here</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li class="dropdown-header">Nav header</li>
+                  <li><a href="https://v3.bootcss.com/examples/navbar/#">Separated link</a></li>
+                  <li><a href="https://v3.bootcss.com/examples/navbar/#">One more separated link</a></li>
+                </ul>
+              </li>
+            </ul>
+          -->
+            <ul class="nav navbar-nav navbar-right">
+              <li class="active"><a href="#">登录 <span class="sr-only">(current)</span></a></li>
+              <li><a href="../sign">注册</a></li>
+              <li><a href="../forget">忘记密码</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
+    <!--
+      <form class="form-signin" method="post" hidden>
+        {% csrf_token %}
+
+        <h2 class="form-signin-heading">登录</h2>
+        <label for="inputEmail" class="sr-only">账号</label>
+        <input type="text" id="inputEmail" class="form-control" name="username" placeholder="Username" required="" autofocus="">
+        <label for="inputPassword" class="sr-only">密码</label>
+
+          <input hidden type="text" id="flag" name="flag" value="0">
+
+        <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password" required="">
+        <input type="radio" name="identity" value="student" checked="checked">学生
+        <input type="radio" name="identity" value="teacher">教师
+        <input type="radio" name="identity" value="manager">仪器管理员<br>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-me"> 记住密码
+          </label>
+        </div>
+          <span style="color:red;">{{ error_msg }}</span>
+-->
+
+          <!--<span hidden id="flag">0</span>-->
+          <!-- flag = 1, 表示验证码通过-->
+          <!--
+        <div class="form-group">
+            <label for="inputPassword" class="col-sm-2 control-label">验证码</label>
+            <div class="col-sm-10" class="form-control">
+            -->
+                <!--<span hidden id="flag">0</span>-->
+                <!-- flag = 1, 表示验证码通过-->
+          <!--
+                <div id="mpanel4" ></div>
+            </div>
+        </div>
+        -->
+        <!--
+        <button class="btn btn-lg btn-danger btn-block" type="submit">登录</button>
+      </form>
+      
+    </div>
+    -->
+
+    <div class="row clearfix">
+        <div class="col-md-12 column" style="height: 200px;margin-top: -150px">
+        </div>
+    </div>
+        <form method="post">
+            {% csrf_token %}
+    <div class="row clearfix">
+        <div class="col-md-3 column">
+        </div>
+        <div class="col-md-6 column">
+            <div class="panel panel-danger">
+                <div class="panel-heading text-center"><span style="font-size: 16px">——用户登录——</span></div>
+                <div class="panel-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="inputUser" class="col-sm-2 control-label" >用户名</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="inputUser" placeholder="username" name="username">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword" class="col-sm-2 control-label" >密码</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="password">
+                            </div>
+                        </div>
+                        <input hidden type="text" id="flag" name="flag" value="0">
+                        &nbsp;<p>
+                        <input type="radio" name="identity" value="student" checked="checked">&nbsp;&nbsp;学生&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="identity" value="teacher">&nbsp;&nbsp;教师&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="identity" value="manager">&nbsp;&nbsp;仪器管理员
+                        </p>
+                        <div class="checkbox">
+                            <label>
+                            <input type="checkbox" value="remember-me">记住密码
+                          </label>
+                        </div>
+                        <span style="color:red;" class="col-md-8">{{ error_msg }}</span>
+                        <br>
+
+                        <div class="form-group">
+                            <label for="inputPassword" class="col-sm-2 control-label">验证码</label>
+                            <div class="col-sm-10" class="form-control">
+                                <div id="mpanel4" ></div>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+
+                        <button class="btn btn-lg btn-danger btn-block" type="submit" >登录</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-3 column">
+            </div>
+        </div>
+    </div>
+        </form>
+</div>
+
+
+ <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{% static 'Navbar Template for Bootstrap_files/jquery.min.js.下载' %}"></script> 
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script> 
+    <script src="{% static 'Navbar Template for Bootstrap_files/bootstrap.min.js.下载' %}"></script> 
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{% static 'Navbar Template for Bootstrap_files/ie10-viewport-bug-workaround.js.下载' %}"></script> 
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{% static 'Signin Template for Bootstrap_files/ie10-viewport-bug-workaround.js.下载' %}"></script> 
+    <script>
+        function Form_Submit() {
+
+
+            return true;
+
+
+
+            let csrf = $("[name=csrfmiddlewaretoken]").val();
+            let user = $('#inputUser').val().trim();
+            let pwd = $('#inputPassword').val().trim();
+            //let code = $('#code').val();
+
+            //判断input不能为空
+            if (user.length === 0) {
+                swal({
+                    title: '用户名不能为空！',
+                    type: 'error',  //展示成功的图片
+                    timer: 1000,  //延时毫秒数
+                    showConfirmButton: false  //关闭确认框
+                }, function () {
+                    //刷新当前页面
+                    window.location.reload();
+                });
+                return false
+            }
+
+            if (pwd.length === 0) {
+                swal({
+                    title: '密码不能为空！',
+                    type: 'error',  //展示成功的图片
+                    timer: 1000,  //延时毫秒数
+                    showConfirmButton: false  //关闭确认框
+                }, function () {
+                    //刷新当前页面
+                    window.location.reload();
+                });
+                return false
+            }
+
+            //发送ajax请求
+            $.ajax({
+                url: "/login/",
+                type: "post",
+                data: {
+                    username: user,
+                    password: pwd,
+                    csrfmiddlewaretoken: csrf,
+                },
+                success: function (data) {
+                    console.log(data);
+                    arg = JSON.parse(data);
+                    //console.log(arg.status);
+                    if (arg.code == "200") { //判断http 状态
+                        swal({
+                            title: '登录成功！',
+                            type: 'success',  //展示成功的图片
+                            timer: 500,  //延时500毫秒
+                            showConfirmButton: false  //关闭确认框
+                        }, function () {
+                            window.location.href = "/index/";  //跳转后台首页
+                        });
+                    } else {
+                        swal({
+                            title: '登录失败！',
+                            type: 'error',  //展示成功的图片
+                            timer: 1000,  //延时毫秒数
+                            showConfirmButton: false  //关闭确认框
+                        }, function () {
+                            //console.log("登录失败");
+                            //刷新当前页面
+                            window.location.reload();
+                        });
+                    }
+                },
+                error: function (data) {
+                    //console.log("失败data",data);
+                    swal({
+                        text: '网络请求不可达',
+                        title: '登录失败',
+                        type: 'error',
+                    });
+                    //刷新当前页面
+                    window.location.reload();
+                }
+            });
+        }
+
+// 滑块验证码
+$('#mpanel4').slideVerify({
+    type: 2,   //类型
+    vOffset: 5,  //误差量，根据需求自行调整
+    vSpace: 5, //间隔
+    imgName: ['1.jpg', '2.jpg'],
+    imgSize: {
+        // 设置100%宽度
+        width: '100%',
+        height: '200px',
+    },
+    blockSize: {
+        width: '40px',
+        height: '40px',
+    },
+    barSize: {
+        width: '100%',
+        height: '40px',
+    },
+    ready: function () {
+    },
+    success: function () {
+        //alert('验证成功，添加你自己的代码！');
+        //......后续操作
+        document.getElementById("flag").value = "1"
+
+        Form_Submit()
+    },
+    error: function () {
+        //              alert('验证失败！');
+    }
+
+});
+
+    </script>
+
+</body></html>

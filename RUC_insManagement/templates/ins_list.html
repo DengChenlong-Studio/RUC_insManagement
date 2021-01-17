@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>学生申请仪器界面</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+    .fakeimg {
+      height: 200px;
+      background: #aaa;
+    }
+
+    .django_img {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+<h2>学生申请仪器界面</h2>
+
+<table class="table table-striped">
+    <caption>可选仪器</caption>
+    <thead>
+      <tr>
+        <th>仪器ID</th>
+        <th>仪器名称</th>
+        <th>仪器类型</th>
+        <th>仪器功能</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      {% for g in groups %}
+      <tr>
+        <td>{{g.id}}</td>
+        <td>{{g.name}}</td>
+        <td>{{g.type}}</td>
+        <td>{{g.func}}</td>
+        <td>
+          <button type="button" class="btn btn-default btn-yuyue" ins="{{g.id}}">预约</button>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+</table>
+<br>
+<table class="table table-striped">
+  <caption>我的预约</caption>
+  <thead>
+    <tr>
+      <th>预约ID</th>
+      <th>提交时间</th>
+      <th>预约日期</th>
+      <th>预约时间</th>
+      <th>预约仪器ID</th>
+      <th>仪器名称</th>
+      <th>预约备注</th>
+      <th>预约状态</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    {% for g in appgroups %}
+    <tr>
+      <td>{{g.id}}</td>
+      <td>{{g.app_datetime}}</td>
+      <td>{{g.use_date}}</td>
+      <td>{{g.use_time}}</td>
+      <td>{{g.ins_id_id}}</td>
+      <td>{{g.name}}</td>
+      <td>{{g.comment}}</td>
+      <td>{{g.state}}</td>
+      <td>
+        <button type="button" class="btn btn-default btn-quxiao" ins="{{g.id}}">取消预约</button>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+{% include 'add_appoint_dialog.html' %}
+
+<script>
+    $(".btn-quxiao").click(function(){
+      _ins = $(this).attr("ins")
+      
+      $.ajax({
+        type:"GET",
+        contentType:"application/json;charset=UTF-8",
+        url:"/Student/"+window.location.pathname.match(/\d+/g)+"/quxiao",   //
+        data:{
+          delete_app:_ins
+        },
+        success:function(result){
+          console.log("success!")
+          console.log(result)
+          alert("已取消！")
+          setTimeout(function() {
+            location.reload();
+          }, 1 * 1000);
+        },
+        error:function(e){
+          console.log(e.status);
+          console.log(e.responseText);
+        }
+      })
+    })
+
+
+    function send_app(event){   //点击最后的提交按钮后发生的函数
+      var _comment = $("#app_comment").val()
+      var timeNum = document.getElementsByName("time"); //  获取checkbox对象,是一个数组对象
+      var _date = $("#app_date").val()
+      var _time = "00000000"; //用于存储已选择的选项值
+      for (let i = 0; i < timeNum.length; ++i) { //遍历数组中的对象，查看有没有被选择的值
+        if (timeNum[i].checked) {  //checked代表被选择
+          _time += '1';  //把被选择的数据复制给hobby变量
+        }
+        else{
+          _time +='0';
+        }
+      }
+      _time += '00';
+      if (_time == "00000000000000000000000"){  //time为空代表没有选择
+        alert("请选择一个时间段");    
+      } 
+      //else {
+        //alert(_time);
+      //}
+      $.ajax({
+        type:"GET",
+        contentType:"application/json;charset=UTF-8",
+        url:"/Student/"+window.location.pathname.match(/\d+/g)+"/sendapp",
+        data:{
+          "ins":event.data.ins,
+          "comment":_comment,
+          "time":_time,
+          "date":_date
+          },
+        success:function(result){
+          console.log("success!")
+          console.log(result)
+          alert("申请已提交！")
+          setTimeout(function() {
+            location.reload();
+          }, 1 * 1000);
+        },
+        error:function(e){
+          console.log(e.status);
+          console.log(e.responseText);
+        }
+      })
+    }
+
+
+    $(".btn-yuyue").click(function(){  //点击预约后弹出对话框
+      //$("#add_app_dialog").modal("show");
+      var _ins = $(this).attr("ins");
+      var data = {ins:_ins};
+      $("#tijiao").click(data,send_app);
+    })
+
+
+
+  </script>
+
+<script>
+  var date=new Date();//伤害发生日期：用户可以按照伤害发生日期进行查询，必输项，默认为当天
+  var year = date.getFullYear();
+  var month = date.getMonth()+1;
+  var day = date.getDate();
+  $("#app_date").val(String(year)+"-"+String(month)+"-"+String(day));
+  //$("#app_date").val(String(year)+"年-"+String(month)+"月-"+String(day)+"日")
+  //alert($("#app_date").val());
+</script>
+
+<script>
+  //页面初始化完成后，根据初始化的当天日期，改变可选的时间段
+  $(document).ready(function(){
+    date_init = $("#app_date").val();
+    $.ajax({
+        type:"GET",
+        contentType:"application/json;charset=UTF-8",
+        url:"/Student/pick_app_time",   //返回今天还有哪些日期可以选
+        data:{
+          date:date_init
+        },
+        success:function(result){    //把不可以选的日期标志不可选
+          //alert(result)
+          console.log("success!")
+          console.log(result.picktime)
+          for(let i = 8; i < 22; ++i){
+            if(result.picktime[i] == '1'){
+              $('#check'+String(i)).attr("disabled",true);
+            }
+            else{
+              $('#check'+String(i)).attr("disabled",false);
+            }
+          }
+        },
+        error:function(e){
+          console.log(e.status);
+          console.log(e.responseText);
+        }
+      })
+  });
+</script>
+<script>
+  //当选中的预约的日期改变时，相应的改变可选的时间段
+  $("#app_date").change(function(){
+    date_init = $("#app_date").val();
+    $.ajax({
+        type:"GET",
+        contentType:"application/json;charset=UTF-8",
+        url:"/Student/pick_app_time",   //返回今天还有哪些日期可以选
+        data:{
+          date:date_init
+        },
+        success:function(result){    //把不可以选的日期标志不可选
+          //alert(result)
+          console.log("success!")
+          console.log(result.picktime)
+          for(let i = 8; i < 22; ++i){
+            if(result.picktime[i] == '1'){
+              $('#check'+String(i)).attr("disabled",true);
+            }
+            else{
+              $('#check'+String(i)).attr("disabled",false);
+            }
+          }
+        },
+        error:function(e){
+          console.log(e.status);
+          console.log(e.responseText);
+        }
+      })
+  })
+</script>
+
+
+</body>
+</html>

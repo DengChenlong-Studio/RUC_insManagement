@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>{{student_name}}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Example of Fixed Layout with Bootstrap version 2.0 from w3cschool.cc">
+  <meta name="author" content="">
+  <link rel="stylesheet" href="{% static 'css/jquery.range.css'%}"/>
+  <link rel="stylesheet" href="{% static 'css/jquery.mCustomScrollbar.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
+  <link rel="stylesheet" href="{% static 'css/all_project.css'%}">
+  <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+  <link rel="stylesheet" href="{% static 'css/font.css' %}">
+  <link rel="stylesheet" href="{% static 'css/xadmin.css' %}">
+  <script src="{% static 'lib/layui/layui.js' %}" charset="utf-8"></script>
+  <script type="text/javascript" src="{% static 'js/xadmin.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/xm-select.js' %}"></script>
+  <style>
+    #app {
+      background-color: #f2f2f2;
+    }
+    
+    .el-col {
+      border-radius: 4px;
+    }
+    .bg-purple-dark {
+      background: #99a9bf;
+    }
+    .bg-purple {
+      background: #d3dce6;
+    }
+    .bg-purple-light {
+      background: #e5e9f2;
+    }
+    .grid-content {
+      border-radius: 4px;
+      min-height: 36px;
+    }
+    .row-bg {
+      padding: 10px 0;
+      background-color: #f9fafc;
+    }
+    #ins_table {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    .col-md-6{
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    .main_box h3 {
+      border-left: solid 4px #ae0a29;
+      font-size: 18px;
+      color: #333;
+      line-height: 18px;
+      text-indent: 8px;
+    }
+    
+
+  </style>
+</head>
+<body>
+
+  
+  <div class="layui-fluid">
+
+    <!-- 搜索框 
+     <form role="search" method="get" id="searchform">
+      <input class="layui-input" type="search" name="q" placeholder="搜索" id="search_input" required>
+      <input class="layui-btn" type="button" class="btn btn-default" id="search_btn" value="搜索"></input>
+    </form>-->
+
+    
+    <div class="layui-card-body ">
+
+      
+      <div class="main_box">
+        <h3> 仪器预约信息 </h3>
+      </div>
+      <br>
+      <form class="layui-form layui-col-space5">
+          <div class="layui-inline layui-show-xs-block">
+              <input type="text" name="username" placeholder="请输入仪器名" autocomplete="off" class="layui-input" id="search_input"></div>
+          <div class="layui-inline layui-show-xs-block">
+              <input type="button" class="layui-btn" lay-submit=""  id="search_btn" value="搜索">
+                  <!--<i class="layui-icon">&#xe615;</i>-->
+          </div>
+      </form>
+  </div>
+
+  <div class="layui-card-body ">
+    <div class="layui-row" id="ins_table">
+      {% for g in groups %}
+      
+      
+      <div class="col-md-6">
+        <div class="media" style="background-color: #f2f2f2;">
+          <div class="media-left">
+            
+            <img src={{g.picture_path}} height="160px">
+           <!-- <img id="instrument_picture" src="{% static template %}" height="160px">{% with "media/picture/temp"|add:g.ins_id|add:".png" as template %}
+            {% endwith %}-->
+            
+          </div>
+
+          <div class="media-body">
+            <div class="content">
+              <div class="title">
+                  <div class="row">
+                      <div class="col-md-12 col-xs-12">
+                          <p><strong>{{g.ins_name}}</strong></p>
+                      </div>
+                      <br>
+                      <div class="col-md-12 col-xs-12">
+                        <button type="button" class="btn btn-xs btn-danger btn-xiangqing" ins="{{g.ins_id}}" style="float:left">详情</button>
+                        <button type="button" class="btn btn-xs btn-danger btn-yuyue" ins="{{g.ins_id}}" style="float:left;margin-left: 10px;">预约</button>
+                      </div>
+                  </div>
+              </div>
+              <div class="state" style="text-align: left;">
+                <p>仪器状态：{{g.ins_state}}</p>
+              </div>
+              <div class="contact" style="text-align: left;">
+                  <p>联系人：{{g.man_name}}</p>
+              </div>
+              <div class="address">
+                  <p>地址: {{g.ins_address}}</p>
+              </div>
+              <div class="phone">
+                  <p>电话：{{g.man_phone}}</p>
+              </div>
+            </div>
+          </div>
+        </div> 
+      </div>
+      {% endfor %}
+    </div>
+    </div>
+  </div>
+
+</body>
+<script type="text/javascript" src="{% static 'js/xm-select.js' %}"></script>
+{% include 'add_appoint_dialog.html' %}
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="{% static 'lib/layui/layui.js' %}" charset="utf-8"></script>
+<script type="text/javascript" src="{% static 'js/xadmin.js' %}"></script>
+
+
+<script>
+    var current_ins_id = 0;
+    var global_list_time = [];//全局变量，存储现在那些时间可以选择
+    var global_chose_time = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];//全局变量，储存现在选中了哪些时间
+    const replaceStr = (str, index, char) => {
+      const strAry = str.split('');
+      strAry[index] = char;
+      return strAry.join('');
+    }
+    $(".btn-quxiao").click(function(){
+      _ins = $(this).attr("ins")
+      
+      $.ajax({
+        type:"GET",
+        contentType:"application/json;charset=UTF-8",
+        url:"/Student/"+window.location.pathname.match(/\d+/g)+"/quxiao",   //
+        data:{
+          delete_app:_ins
+        },
+        success:function(result){
+          console.log("success!")
+          console.log(result)
+          alert("已取消！")
+          setTimeout(function() {
+            location.reload();
+          }, 0.1 * 1000);
+        },
+        error:function(e){
+          console.log(e.status);
+          console.log(e.responseText);
+        }
+      })
+    })
+
+
+    function send_app(event){   //点击最后的提交按钮后发生的函数
+      var demo2 = xmSelect.get('#demo1', true);
+      chose_value = demo2.getValue('value');
+      console.log(chose_value);
+      for (let i = 0; i < chose_value.length; i++) {
+        //console.log(chose_value[i]);
+        global_chose_time[chose_value[i]]=1;
+      }
+      //alert('获取单实例#demo1当前选中值: ' + demo2.getValue('value'));
+      
+
+
+      var _comment = $("#app_comment").val()
+      var timeNum = document.getElementsByName("time"); //  获取checkbox对象,是一个数组对象
+      var _date = $("#app_date").val()
+      var _time = "00000000"; //用于存储已选择的选项值
+      for (let i = 8; i < 24; ++i) { //遍历数组中的对象，查看有没有被选择的值
+        if (global_chose_time[i]==1) {  //checked代表被选择
+          _time += '1';  //把被选择的数据复制给hobby变量
+        }
+        else{
+          _time +='0';
+        }
+      }
+      /*
+      for (let i = 0; i < chose_value.length; i++) {
+        console.log(chose_value[i]);
+        //_time[chose_value[i]]='1';
+        replaceStr(_time,chose_value[i],'1');
+      }
+      */
+      console.log(_time);
+      console.log(_time);
+      if (_time == "00000000000000000000000"){  //time为空代表没有选择
+        alert("请选择一个时间段");
+        return false;    
+      } 
+      if(_comment.length==0){
+        alert("请填写预约备注");
+        return false;
+      }
+      //else {
+        //alert(_time);
+      //}
+      $.ajax({
+        type:"GET",
+        contentType:"application/json;charset=UTF-8",
+        url:"/Student/"+window.location.pathname.match(/\d+/g)+"/sendapp",
+        data:{
+          "ins":event.data.ins,
+          "comment":_comment,
+          "time":_time,
+          "date":_date
+          },
+        success:function(result){
+          console.log("success!");
+          console.log(result);
+          alert("申请已提交！");
+          
+          setTimeout(function() {
+            window.location.reload();
+            /*$.ajax({
+                url:"/Student/"+window.location.pathname.match(/\d+/g)+"/inslist",
+                data:{
+                    
+                },
+                type:'get',
+                datatype:"html",
+                success:function (data) {
+                    $("#main_content").html(data)
+                }
+            })*/
+          }, 1 * 500);
+
+        },
+        error:function(e){
+          console.log(e.status);
+          console.log(e.responseText);
+        }
+      })
+    }
+
+
+    $(".btn-yuyue").click(function(){  //点击预约后弹出对话框
+      jQuery.noConflict();
+      $("#add_app_dialog").modal("show");
+      var _ins = $(this).attr("ins");
+      var data = {ins:_ins};
+      $("#tijiao").click(data,send_app);
+    })
+
+    function yuyue(ins_id){
+      jQuery.noConflict();
+      $("#add_app_dialog").modal("show");
+      var _ins = ins_id;
+      var data = {ins:_ins};
+      $("#tijiao").click(data,send_app);
+    }
+
+  </script>
+
+<script>
+  var date=new Date();//伤害发生日期：用户可以按照伤害发生日期进行查询，必输项，默认为当天
+  var year = date.getFullYear();
+  var month = date.getMonth()+1;
+  var day = date.getDate();
+  //alert(String(year)+"-"+String(month)+"-"+String(day));
+  $("#app_date").val(String(year)+"-"+String(month)+"-"+String(day));
+  //$("#app_date").val(String(year)+"年-"+String(month)+"月-"+String(day)+"日")
+  //alert($("#app_date").val());
+</script>
+
+<script>
+    //页面初始化完成后，根据初始化的当天日期，改变可选的时间段
+    $(document).ready(function(){
+    var date=new Date();//伤害发生日期：用户可以按照伤害发生日期进行查询，必输项，默认为当天
+    var year = date.getFullYear();
+    var month = date.getMonth()+1;
+    var day = date.getDate();
+    //alert(String(year)+"-"+String(month)+"-"+String(day));
+    $("#app_date").val(String(year)+"-"+String(month)+"-"+String(day));
+    //$("#app_date").val(String(year)+"年-"+String(month)+"月-"+String(day)+"日")
+    //alert($("#app_date").val());
+
+    //date_init = $("#app_date").val();
+    //alert(date_init);
+    //console.log(date_init);
+    date_init=String(year)+"-"+String(month)+"-"+String(day)
+    $.ajax({
+        type:"GET",
+        contentType:"application/json;charset=UTF-8",
+        url:"/Student/pick_app_time",   //返回今天还有哪些日期可以选
+        async:true,//同步属性设置为true 
+        data:{
+          date:date_init
+        },
+        success:function(result){    //把不可以选的日期标志不可选
+          //alert(result)
+          console.log("success!")
+          console.log(result.picktime)
+          global_list_time.splice(0,global_list_time.length);//清空数组
+          for(let i = 8; i < 22; ++i){
+            if(result.picktime[i] == '1'){
+              $('#check'+String(i)).attr("disabled",true);
+            }
+            else{
+              $('#check'+String(i)).attr("disabled",false);
+              global_list_time.push(i);
+            }
+          }
+        },
+        error:function(e){
+          //console.log(e.status);
+          //console.log(e.responseText);
+        }
+      })
+  });
+</script>
+<script>
+  //当选中的预约的日期改变时，相应的改变可选的时间段
+  $("#app_date").change(function(){
+    date_init = $("#app_date").val();
+    $.ajax({
+        type:"GET",
+        contentType:"application/json;charset=UTF-8",
+        url:"/Student/pick_app_time",   //返回今天还有哪些日期可以选
+        async:true,//同步属性设置为true 
+        data:{
+          date:date_init
+        },
+        success:function(result){    //把不可以选的日期标志不可选
+          //alert(result)
+          console.log("success!")
+          console.log(result.picktime)
+          global_list_time.splice(0,global_list_time.length);//清空数组
+          for(let i = 8; i < 22; ++i){
+            if(result.picktime[i] == '1'){
+              $('#check'+String(i)).attr("disabled",true);
+            }
+            else{
+              $('#check'+String(i)).attr("disabled",false);
+              global_list_time.push(i);
+            }
+          }
+        },
+        error:function(e){
+          console.log(e.status);
+          console.log(e.responseText);
+        }
+      })
+  })
+</script>
+
+<script>
+  $(document).ready(function(){
+    // 首先绑定点击事件与回车按钮
+    $('#search_input').bind('keypress', function(event){
+      if(event.keyCode == "13"){
+        event.preventDefault();
+        $('#search_btn').click();
+      }
+    });
+
+    // 点击事件
+    $('#search_btn').click(function(){
+      var keyword = $("#search_input").val(); // 获得关键字
+      
+
+      $.ajax({
+        type: 'get',
+        url: '/Student/'+window.location.pathname.match(/\d+/g)+'/search',
+        data: {keyword: keyword},
+        success: function(result){
+          
+          var tbl = $('#ins_table');
+          // tbl.remove(); // 删除表格中数据
+          tbl.empty();
+          // // 添加查找出来的新数据
+          
+          for(var i = 0; i < result.length; i++){
+            var d = result[i];
+            
+            // 头
+            var s = '<div class="col-md-6">'; 
+            s += '<div class="media" style="background-color: #f2f2f2;">';
+            
+            
+            // 增加图片
+            s += '<div class="media-left"><img src=' + d['picture_path'];
+            s += ' height="160px"></div>';
+
+            // 增加名字
+            s += '<div class="media-body"><div class="content"><div class="title"><div class="row">';
+            s += '<div class="col-md-12 col-xs-12"><p><strong>';
+            s += d['name'];
+            s += '</strong></p></div>';
+
+            // 增加两个按钮
+            s += '<br><div class="col-md-12 col-xs-12"><button type="button" class="btn btn-xs btn-danger btn-xiangqing" onclick="xiangqing('
+            s += d['id']
+            s += ')" style="float:left" ins="';
+            s += d['id'];
+            s += '">详情</button><button type="button" class="btn btn-xs btn-danger btn-yuyue" onclick="yuyue('
+            s += d['id']
+            s += ')" style="float:left;margin-left: 10px;" ins="';
+            s += d['id'];
+            s += '">预约</button></div></div></div>';
+            
+            // 增加文字描述
+            // 仪器状态
+            s += '<div class="state" style="text-align: left;"><p>仪器状态：';
+            s += d['state'];
+            s += '</p></div>';
+
+            // 联系人
+            s += '<div class="contact" style="text-align: left;"><p>联系人：';
+            s += d['man_name'];
+            s += '</p></div>';
+
+            // 地址
+            s += '<div class="address"><p>地址: ';
+            s += d['address'];
+            s += '</p></div>';
+
+            // 电话
+            s += '<div class="phone"><p>电话：';
+            s += d['phone'];
+            s += '</p></div></div></div>';
+
+            
+            // 尾
+            s += '</div></div>'; 
+            
+            tbl.append($(s));
+          }
+          $(tbl).reset();
+          console.log(result);
+        },
+        error: function(){
+          alert("未搜索到相应结果");
+        }
+      });
+
+    });
+  });
+
+
+</script>
+
+{% include 'student/get_instrument_detail_information.html' %}
+<script>
+  function get_detail_information(data){
+      console.log(data);
+        $.ajax({
+            type:"GET",
+            contentType:"application/json;charset=UTF-8",
+            url:"/Student/"+window.location.pathname.match(/\d+/g)+"/get_instrument_detail_information",
+            data:{
+              "ins_id":data.ins_id,
+            },
+            success:function(result){
+              console.log("success!")
+              console.log(result.name)//仪器名称
+              var name_content=document.getElementById("instrument_name");
+              name_content.innerHTML=result.name;
+
+              console.log(result.manufacturer)//生产商
+              var manufacturer_content=document.getElementById("instrument_manufacturer");
+              manufacturer_content.innerHTML=result.manufacturer;
+
+              console.log(result.type)//型号
+              var type_content=document.getElementById("instrument_type");
+              type_content.innerHTML=result.type;
+
+              console.log(result.purchaseDate)//购买日期
+              var purchaseDate_content=document.getElementById("instrument_purchase_date");
+              purchaseDate_content.innerHTML=result.purchaseDate;
+
+              console.log(result.technicalParameters)//技术参数
+              var technicalParameters_content=document.getElementById("instrument_technical_parameters");
+              technicalParameters_content.innerHTML=result.technicalParameters;
+
+              console.log(result.func)//主要功能
+              var function_content=document.getElementById("instrument_function");
+              function_content.innerHTML=result.func;
+
+            },
+            error:function(e){
+              console.log(e.status);
+              console.log(e.responseText);
+            }
+        })
+    }
+
+    $(".btn-xiangqing").click(function(){
+      jQuery.noConflict();
+      $("#get_instrument_detail_information").modal("show");
+      var _ins_id = $(this).attr("ins");
+      var data = {ins_id:_ins_id};
+      get_detail_information(data);
+    })
+
+    function xiangqing(ins_id){
+      jQuery.noConflict();
+      $("#get_instrument_detail_information").modal("show");
+      var _ins_id = ins_id
+      var data = {ins_id:_ins_id};
+      get_detail_information(data);
+    }
+</script>
+
+<script src="{% static 'lib/layui/layui.js' %}" charset="utf-8"></script>
+<script>
+  
+  
+  var list =  []
+  console.log(global_list_time)
+  //console.log("test")
+  
+  setTimeout(() => {  //这里必须等待异步刷新的结果，你学到了吗
+    console.log(global_list_time.length)
+    for (let i = 0; i < 14; i++) {
+      //console.log(global_list_time[i]);
+      var newdic = {name:String(global_list_time[i])+':00-'+String(global_list_time[i]+1)+':00',value:global_list_time[i]};
+      list.push(newdic);
+    }
+  //console.log(list)
+    var demo1 = xmSelect.render({
+      el: '#demo1', 
+      theme: {
+		  color: '#ae0a29',
+      },
+      autoRow: true,
+      data: list
+})
+	}, 1000);  //1秒后执行代码
+  
+
+</script>
+
+
+</html>

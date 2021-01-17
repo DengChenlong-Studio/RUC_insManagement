@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>学生申请仪器界面</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+    .fakeimg {
+      height: 200px;
+      background: #aaa;
+    }
+
+    .django_img {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+<h2>学生申请仪器界面</h2>
+
+<div>
+<form role="search" method="get" id="searchform">
+	<input class="form-control" type="search" name="q" placeholder="搜索" id="search_input" required>
+	<button class="btn btn-danger" type="submit_query" id="search_btn">搜索</button>
+</form>
+</div>
+
+<table class="table table-striped" id="ins_table">
+    
+    <thead>
+      <tr>
+        <th>仪器ID</th>
+        <th>仪器名称</th>
+        <th>仪器类型</th>
+        <th>仪器功能</th>
+        <th>操作</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      {% for g in groups %}
+      <tr>
+        <td>{{g.id}}</td>
+        <td>{{g.name}}</td>
+        <td>{{g.type}}</td>
+        <td>{{g.func}}</td>
+        <td>
+          <button type="button" class="btn btn-danger btn-yuyue" ins="{{g.id}}">预约</button>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+</table>
+<br>
+
+
+
+{% include 'add_appoint_dialog.html' %}
+
+<script>
+    $(".btn-quxiao").click(function(){
+      _ins = $(this).attr("ins")
+      
+      $.ajax({
+        type:"GET",
+        contentType:"application/json;charset=UTF-8",
+        url:"/Student/"+window.location.pathname.match(/\d+/g)+"/quxiao",   //
+        data:{
+          delete_app:_ins
+        },
+        success:function(result){
+          console.log("success!")
+          console.log(result)
+          alert("已取消！")
+          setTimeout(function() {
+            location.reload();
+          }, 1 * 1000);
+        },
+        error:function(e){
+          console.log(e.status);
+          console.log(e.responseText);
+        }
+      })
+    })
+
+
+    function send_app(event){   //点击最后的提交按钮后发生的函数
+      var _comment = $("#app_comment").val()
+      var timeNum = document.getElementsByName("time"); //  获取checkbox对象,是一个数组对象
+      var _date = $("#app_date").val()
+      var _time = "00000000"; //用于存储已选择的选项值
+      for (let i = 0; i < timeNum.length; ++i) { //遍历数组中的对象，查看有没有被选择的值
+        if (timeNum[i].checked) {  //checked代表被选择
+          _time += '1';  //把被选择的数据复制给hobby变量
+        }
+        else{
+          _time +='0';
+        }
+      }
+      _time += '00';
+      if (_time == "00000000000000000000000"){  //time为空代表没有选择
+        alert("请选择一个时间段");    
+      } 
+      //else {
+        //alert(_time);
+      //}
+      $.ajax({
+        type:"GET",
+        contentType:"application/json;charset=UTF-8",
+        url:"/Student/"+window.location.pathname.match(/\d+/g)+"/sendapp",
+        data:{
+          "ins":event.data.ins,
+          "comment":_comment,
+          "time":_time,
+          "date":_date
+          },
+        success:function(result){
+          console.log("success!")
+          console.log(result)
+          alert("申请已提交！")
+          setTimeout(function() {
+            location.reload();
+          }, 1 * 1000);
+        },
+        error:function(e){
+          console.log(e.status);
+          console.log(e.responseText);
+        }
+      })
+    }
+
+
+    $(".btn-yuyue").click(function(){  //点击预约后弹出对话框
+      jQuery.noConflict();
+      $("#add_app_dialog").modal("show");
+      var _ins = $(this).attr("ins");
+      var data = {ins:_ins};
+      $("#tijiao").click(data,send_app);
+    })
+
+
+/*
+    // 这个不用了
+    $(".btn-yuyue1").click(function(){
+      var _ins = $(this).attr("ins")
+      var _comment = $("#app_comment").val()
+      var timeNum = document.getElementsByName("time"); //  获取checkbox对象,是一个数组对象
+      var _date = $("#app_date").val()
+      var _time = "00000000"; //用于存储已选择的选项值
+      for (let i = 0; i < timeNum.length; ++i) { //遍历数组中的对象，查看有没有被选择的值
+        if (timeNum[i].checked) {  //checked代表被选择
+          _time += '1';  //把被选择的数据复制给hobby变量
+        }
+        else{
+          _time +='0';
+        }
+      }
+      _time += '00';
+      if (_time == "00000000000000000000000"){  //time为空代表没有选择
+        alert("请选择一个时间段");    
+      } 
+      //else {
+        //alert(_time);
+      //}
+      $.ajax({
+        type:"GET",
+        contentType:"application/json;charset=UTF-8",
+        url:"/Student/"+window.location.pathname.match(/\d+/g)+"/sendapp",
+        data:{
+          "ins":_ins,
+          "comment":_comment,
+          "time":_time,
+          "date":_date
+          },
+        success:function(result){
+          console.log("success!")
+          console.log(result)
+          alert("申请已提交！")
+          setTimeout(function() {
+            location.reload();
+          }, 1 * 1000);
+        },
+        error:function(e){
+          console.log(e.status);
+          console.log(e.responseText);
+        }
+      })
+    })
+    */
+  </script>
+
+<script>
+  var date=new Date();//伤害发生日期：用户可以按照伤害发生日期进行查询，必输项，默认为当天
+  var year = date.getFullYear();
+  var month = date.getMonth()+1;
+  var day = date.getDate();
+  $("#app_date").val(String(year)+"-"+String(month)+"-"+String(day));
+  //$("#app_date").val(String(year)+"年-"+String(month)+"月-"+String(day)+"日")
+  //alert($("#app_date").val());
+</script>
+
+<script>
+  //页面初始化完成后，根据初始化的当天日期，改变可选的时间段
+  $(document).ready(function(){
+    date_init = $("#app_date").val();
+    $.ajax({
+        type:"GET",
+        contentType:"application/json;charset=UTF-8",
+        url:"/Student/pick_app_time",   //返回今天还有哪些日期可以选
+        data:{
+          date:date_init
+        },
+        success:function(result){    //把不可以选的日期标志不可选
+          //alert(result)
+          console.log("success!")
+          console.log(result.picktime)
+          for(let i = 8; i < 22; ++i){
+            if(result.picktime[i] == '1'){
+              $('#check'+String(i)).attr("disabled",true);
+            }
+            else{
+              $('#check'+String(i)).attr("disabled",false);
+            }
+          }
+        },
+        error:function(e){
+          console.log(e.status);
+          console.log(e.responseText);
+        }
+      })
+  });
+</script>
+<script>
+  //当选中的预约的日期改变时，相应的改变可选的时间段
+  $("#app_date").change(function(){
+    date_init = $("#app_date").val();
+    $.ajax({
+        type:"GET",
+        contentType:"application/json;charset=UTF-8",
+        url:"/Student/pick_app_time",   //返回今天还有哪些日期可以选
+        data:{
+          date:date_init
+        },
+        success:function(result){    //把不可以选的日期标志不可选
+          //alert(result)
+          console.log("success!")
+          console.log(result.picktime)
+          for(let i = 8; i < 22; ++i){
+            if(result.picktime[i] == '1'){
+              $('#check'+String(i)).attr("disabled",true);
+            }
+            else{
+              $('#check'+String(i)).attr("disabled",false);
+            }
+          }
+        },
+        error:function(e){
+          console.log(e.status);
+          console.log(e.responseText);
+        }
+      })
+  })
+</script>
+
+<script>
+  $(document).ready(function(){
+    // 首先绑定点击事件与回车按钮
+    $('#search_input').bind('keypress', function(event){
+      if(event.keyCode == "13"){
+        event.preventDefault();
+        $('#search_btn').click();
+      }
+    });
+
+    // 点击事件
+    $('#search_btn').click(function(){
+      var keyword = $("#search_input").val(); // 获得关键字
+
+      $.ajax({
+        type: 'get',
+        url: '/Student/'+window.location.pathname.match(/\d+/g)+'/search',
+        data: {keyword: keyword},
+        success: function(result){
+          var tbl = $('#ins_table');
+          tbl.find('tr:gt(0)').remove(); // 删除表格中数据
+
+          // 添加查找出来的新数据
+          for(var i = 0; i < result.length; i++){
+            var d = result[i];
+            var s = '<tr>';
+            s += '<td>' + d['id'] + '</td>';
+            s += '<td>' + d['name'] + '</td>';
+            s += '<td>' + d['type'] + '</td>';
+            s += '<td>' + d['func'] + '</td>';
+            s += '</tr>';
+            tbl.append($(s));
+          }
+          $(tbl).reset();
+          console.log(result);
+        },
+        error: function(){
+          alert("未搜索到相应结果");
+        }
+      });
+
+    });
+  });
+
+
+</script>
+
+
+</body>
+</html>

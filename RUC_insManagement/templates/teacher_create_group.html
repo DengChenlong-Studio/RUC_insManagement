@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>教师创建课题组界面</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <link rel="stylesheet" href="/static/css/font.css">
+    <link rel="stylesheet" href="/static/css/xadmin.css">
+    <script src="/static/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/static/js/xadmin.js"></script>
+    <style>
+    .fakeimg {
+      height: 200px;
+      background: #aaa;
+    }
+    .layui-form-label {
+        width: 200px !important;
+        text-align: center !important;
+    }
+    .layui-input-block {
+        margin-left: 200px !important;
+    }
+
+    .django_img {
+      width: 100%;
+      height: 100%;
+    }
+    .main_box h3 {
+      border-left: solid 4px #ae0a29;
+      font-size: 18px;
+      color: #333;
+      line-height: 18px;
+      text-indent: 8px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="layui-fluid">
+  <div class="layui-card-body ">
+  <br>
+  <div class="main_box">
+    <h3> 创建课题组 </h3>
+  </div>
+  <br>
+  <form class="layui-form" action="">
+    <div class="layui-form-item layui-form-text">
+      <label class="layui-form-label">课题组编号</label>
+      <div class="layui-input-block">
+        <input type="text" class="layui-input" id="teacher_group_id" class="form-control" name="group_id" placeholder="课题组id">
+      </div>
+    </div>
+
+    <div class="layui-form-item layui-form-text">
+      <label class="layui-form-label">课题组名称</label>
+      <div class="layui-input-block">
+        <input type="text" class="layui-input" id="teacher_group_name" class="form-control" name="group_name" placeholder="课题组名">
+    
+      </div>
+    </div>
+
+    <div class="layui-form-item layui-form-text">
+      <label class="layui-form-label">研究的课题</label>
+      <div class="layui-input-block">
+        <input type="text" class="layui-input" id="teacher_group_topic" class="form-control" name="topic" placeholder="课题">
+      </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+      <label class="layui-form-label">备注</label>
+      <div class="layui-input-block">
+        <textarea type="text" class="layui-textarea" id="teacher_group_comment" name="comment" placeholder="备注"></textarea>
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <div class="layui-input-block">
+        <button type="button" class="layui-btn layui-btn-danger btn-create_group">创建</button>
+      </div>
+    </div>
+  </form>
+  <br>
+  </div>
+</div>
+<br>
+</body>
+
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<script>
+// console.log("?")
+$(".btn-create_group").click(function(){
+    // _cno = $(this).attr("cno")
+    _group_id = $("#teacher_group_id").val()
+    _group_name = $("#teacher_group_name").val()
+    _topic = $("#teacher_group_topic").val()
+    _comment = $("#teacher_group_comment").val()
+    $.ajax({
+    type:"GET",
+    contentType:"application/json;charset=UTF-8",
+    url:"./create_group",
+    data:{
+        group_id:_group_id,
+        group_name:_group_name,
+        topic:_topic,
+        comment:_comment
+    },
+    success:function(result){
+        console.log("success!")
+        console.log(result)
+        alert("新增课题组成功！")
+        setTimeout(function() {
+        location.reload();
+        }, 0.1 * 1000);
+    },
+    error:function(e){
+        console.log(e.status);
+        console.log(e.responseText);
+    }
+    })
+})
+</script>
+
+</html>

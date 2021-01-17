@@ -1,0 +1,401 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ins_name}}</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{% static 'AdminLTE2/plugins/fontawesome-free/css/all.min.css' %}">
+  <!-- fullCalendar -->
+  <link rel="stylesheet" href="{% static 'AdminLTE2/plugins/fullcalendar/main.css' %}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{% static 'AdminLTE2/dist/css/adminlte.min.css' %}">
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+
+  <!-- Content Wrapper. Contains page content -->
+  <!--<div class="content-wrapper">-->
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>{{ins_name}} 使用时间表</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">个人主页</a></li>
+              <li class="breadcrumb-item active">使用日历</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="sticky-top mb-3">
+              <div class="card">
+                <div class="card-header">
+                  <h4 class="card-title">仪器信息</h4>
+                </div>
+                <div class="card-body">
+                  <!-- the events -->
+                  <div id="external-events">
+                    <form>
+                      <label>生产商:</label>
+                      <div class="form-group">
+                          <label class="sr-only" for="instrument_manufacturer">生产商:</label>
+                          <p type="text" class="form-control" id="instrument_manufacturer"></p>
+                      </div>
+                      <label>型号:</label>
+                      <div class="form-group">
+                          <label class="sr-only" for="instrument_type">型号:</label>
+                          <p type="text" class="form-control" id="instrument_type" ></p>
+                      </div>
+                      <label>购买日期:</label>
+                      <div class="form-group">
+                          <label class="sr-only" for="instrument_purchase_date">购买日期:</label>
+                          <p type="text" class="form-control" id="instrument_purchase_date"></p>
+                      </div>
+                      <label>技术参数:</label>
+                      <div class="form-group">
+                          <label class="sr-only" for="instrument_technical_parameters">技术参数:</label>
+                          <textarea type="text" class="form-control" id="instrument_technical_parameters" rows="5"></textarea>
+                      </div>
+                      <label>主要功能:</label>
+                      <div class="form-group">
+                          <label class="sr-only" for="instrument_function">主要功能:</label>
+                          <textarea type="text" class="form-control" id="instrument_function" rows="5"></textarea>
+                      </div>
+                  </form>
+                  </div>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+              <!--
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">Create Event</h3>
+                </div>
+                <div class="card-body">
+                  <div class="btn-group" style="width: 100%; margin-bottom: 10px;">
+                    <ul class="fc-color-picker" id="color-chooser">
+                      <li><a class="text-primary" href="#"><i class="fas fa-square"></i></a></li>
+                      <li><a class="text-warning" href="#"><i class="fas fa-square"></i></a></li>
+                      <li><a class="text-success" href="#"><i class="fas fa-square"></i></a></li>
+                      <li><a class="text-danger" href="#"><i class="fas fa-square"></i></a></li>
+                      <li><a class="text-muted" href="#"><i class="fas fa-square"></i></a></li>
+                    </ul>
+                  </div>
+                  
+                  <div class="input-group">
+                    <input id="new-event" type="text" class="form-control" placeholder="Event Title">
+
+                    <div class="input-group-append">
+                      <button id="add-new-event" type="button" class="btn btn-primary">Add</button>
+                    </div>
+                    
+                  </div>
+                  
+                </div>
+              </div>
+              -->
+            </div>
+          </div>
+          <!-- /.col -->
+          <div class="col-md-9">
+            <div class="card card-primary">
+              <div class="card-body p-0">
+                <!-- THE CALENDAR -->
+                <div id="calendar"></div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  <!--</div>-->
+  <!-- /.content-wrapper -->
+
+  <footer class="main-footer">
+    <div class="float-right d-none d-sm-block">
+      <b>Version</b> 3.0
+    </div>
+    <strong>Copyright &copy; 2020 <a href="https://adminlte.io">数据库大作业小组</a>.</strong> All rights reserved.
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="{% static 'AdminLTE2/plugins/jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap -->
+<script src="{% static 'AdminLTE2/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- jQuery UI -->
+<script src="{% static 'AdminLTE2/plugins/jquery-ui/jquery-ui.min.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'AdminLTE2/dist/js/adminlte.min.js' %}"></script>
+<!-- fullCalendar 2.2.5 -->
+<script src="{% static 'AdminLTE2/plugins/moment/moment.min.js' %}"></script>
+<script src="{% static 'AdminLTE2/plugins/fullcalendar/main.js' %}"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{% static 'AdminLTE2/dist/js/demo.js' %}"></script>
+<!-- Page specific script -->
+<script>
+  $(function () {
+
+    /* initialize the external events
+     -----------------------------------------------------------------*/
+    function ini_events(ele) {
+      ele.each(function () {
+
+        // create an Event Object (https://fullcalendar.io/docs/event-object)
+        // it doesn't need to have a start or end
+        var eventObject = {
+          title: $.trim($(this).text()) // use the element's text as the event title
+        }
+
+        // store the Event Object in the DOM element so we can get to it later
+        $(this).data('eventObject', eventObject)
+
+        // make the event draggable using jQuery UI
+        $(this).draggable({
+          zIndex        : 1070,
+          revert        : true, // will cause the event to go back to its
+          revertDuration: 0  //  original position after the drag
+        })
+
+      })
+    }
+
+    ini_events($('#external-events div.external-event'))
+
+    /* initialize the calendar
+     -----------------------------------------------------------------*/
+    //Date for the calendar events (dummy data)
+    var date = new Date()
+    var d    = date.getDate(),
+        m    = date.getMonth(),
+        y    = date.getFullYear()
+
+    var Calendar = FullCalendar.Calendar;
+    var Draggable = FullCalendar.Draggable;
+
+    var containerEl = document.getElementById('external-events');
+    var checkbox = document.getElementById('drop-remove');
+    var calendarEl = document.getElementById('calendar');
+
+    // initialize the external events
+    // -----------------------------------------------------------------
+
+    new Draggable(containerEl, {
+      itemSelector: '.external-event',
+      eventData: function(eventEl) {
+        return {
+          title: eventEl.innerText,
+          backgroundColor: window.getComputedStyle( eventEl ,null).getPropertyValue('background-color'),
+          borderColor: window.getComputedStyle( eventEl ,null).getPropertyValue('background-color'),
+          textColor: window.getComputedStyle( eventEl ,null).getPropertyValue('color'),
+        };
+      }
+    });
+
+    //写入后端的数据
+    var times = {{time_everyday}};
+    var eventList = [];
+    for (let i = 1; i < 32; i++) {
+      if(times[i] != '0'){
+        var dict = {title:"已预约"+times[i]+"小时",start:new Date(y,m,i),end:new Date(y,m,i),allDay:true,backgroundColor:'#f56954',borderColor:'#f56954'};
+        eventList.push(dict);
+      } 
+    }
+    //console.log(eventList); 
+    app_info = {{ app_info|safe }};
+    console.log(app_info);
+    for(let i = 0;i<app_info.length;i++){
+      var dict={title:app_info[i][0],start:new Date(y,m,app_info[i][2],app_info[i][1]),end:new Date(y,m,app_info[i][2],app_info[i][1]+1),backgroundColor:'#0073b7',borderColor:'#0073b7'};
+      eventList.push(dict);
+    }
+    eventList.push({
+          title          : '正在维修',
+          start          : new Date(y, m, d - 5),
+          end            : new Date(y, m, d - 3),
+          backgroundColor: '#f39c12', //yellow
+          borderColor    : '#f39c12' //yellow
+        });
+
+    
+
+    var calendar = new Calendar(calendarEl, {
+      headerToolbar: {
+        left  : 'prev,next today',
+        center: 'title',
+        right : 'dayGridMonth,timeGridWeek,timeGridDay'
+      },
+      themeSystem: 'bootstrap',
+      //Random default events
+      events: eventList,/*[
+        {
+          title          : '已预约'+times[1]+'小时',
+          start          : new Date(y, m, 2),
+          backgroundColor: '#f56954', //red
+          borderColor    : '#f56954', //red
+          allDay         : true
+        },
+        {
+          title          : '正在维修',
+          start          : new Date(y, m, d - 5),
+          end            : new Date(y, m, d - 2),
+          backgroundColor: '#f39c12', //yellow
+          borderColor    : '#f39c12' //yellow
+        },
+        {
+          title          : 'Meeting',
+          start          : new Date(y, m, d, 10, 30),
+          allDay         : false,
+          backgroundColor: '#0073b7', //Blue
+          borderColor    : '#0073b7' //Blue
+        },
+        {
+          title          : 'Lunch',
+          start          : new Date(y, m, d, 12, 0),
+          end            : new Date(y, m, d, 14, 0),
+          allDay         : false,
+          backgroundColor: '#00c0ef', //Info (aqua)
+          borderColor    : '#00c0ef' //Info (aqua)
+        },
+        {
+          title          : 'Birthday Party',
+          start          : new Date(y, m, d + 1, 19, 0),
+          end            : new Date(y, m, d + 1, 22, 30),
+          allDay         : false,
+          backgroundColor: '#00a65a', //Success (green)
+          borderColor    : '#00a65a' //Success (green)
+        },
+        {
+          title          : 'Click for Google',
+          start          : new Date(y, m, 28),
+          end            : new Date(y, m, 29),
+          url            : 'https://www.baidu.com/',
+          backgroundColor: '#3c8dbc', //Primary (light-blue)
+          borderColor    : '#3c8dbc' //Primary (light-blue)
+        }
+      ],*/
+      
+      editable  : true,
+      droppable : true, // this allows things to be dropped onto the calendar !!!
+      drop      : function(info) {
+        // is the "remove after drop" checkbox checked?
+        if (checkbox.checked) {
+          // if so, remove the element from the "Draggable Events" list
+          info.draggedEl.parentNode.removeChild(info.draggedEl);
+        }
+      }
+    });    
+    
+    calendar.render();
+    // $('#calendar').fullCalendar()
+
+    /* ADDING EVENTS */
+    var currColor = '#3c8dbc' //Red by default
+    // Color chooser button
+    $('#color-chooser > li > a').click(function (e) {
+      e.preventDefault()
+      // Save color
+      currColor = $(this).css('color')
+      // Add color effect to button
+      $('#add-new-event').css({
+        'background-color': currColor,
+        'border-color'    : currColor
+      })
+    })
+    $('#add-new-event').click(function (e) {
+      e.preventDefault()
+      // Get value and make sure it is not null
+      var val = $('#new-event').val()
+      if (val.length == 0) {
+        return
+      }
+
+      // Create events
+      var event = $('<div />')
+      event.css({
+        'background-color': currColor,
+        'border-color'    : currColor,
+        'color'           : '#fff'
+      }).addClass('external-event')
+      event.text(val)
+      $('#external-events').prepend(event)
+
+      // Add draggable funtionality
+      ini_events(event)
+
+      // Remove event from text input
+      $('#new-event').val('')
+    })
+  })
+</script>
+<script>
+  console.log(parseInt(window.location.pathname.match(/\d+/g)));
+        $.ajax({
+            type:"GET",
+            contentType:"application/json;charset=UTF-8",
+            url:"/Student/"+window.location.pathname.match(/\d+/g)+"/get_instrument_detail_information",
+            data:{
+              "ins_id":parseInt(window.location.pathname.match(/\d+/g)),
+            },
+            success:function(result){
+              console.log("success!")
+              console.log(result.name)//仪器名称
+              //var name_content=document.getElementById("instrument_name");
+              //name_content.innerHTML=result.name;
+
+              console.log(result.manufacturer)//生产商
+              var manufacturer_content=document.getElementById("instrument_manufacturer");
+              manufacturer_content.innerHTML=result.manufacturer;
+
+              console.log(result.type)//型号
+              var type_content=document.getElementById("instrument_type");
+              type_content.innerHTML=result.type;
+
+              console.log(result.purchaseDate)//购买日期
+              var purchaseDate_content=document.getElementById("instrument_purchase_date");
+              purchaseDate_content.innerHTML=result.purchaseDate;
+
+              console.log(result.technicalParameters)//技术参数
+              var technicalParameters_content=document.getElementById("instrument_technical_parameters");
+              technicalParameters_content.innerHTML=result.technicalParameters;
+
+              console.log(result.func)//主要功能
+              var function_content=document.getElementById("instrument_function");
+              function_content.innerHTML=result.func;
+
+            },
+            error:function(e){
+              console.log(e.status);
+              console.log(e.responseText);
+            }
+        })
+</script>
+</body>
+</html>

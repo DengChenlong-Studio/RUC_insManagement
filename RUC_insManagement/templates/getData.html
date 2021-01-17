@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>所有表的信息</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+    .fakeimg {
+      height: 200px;
+      background: #aaa;
+    }
+
+    .django_img {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+
+    {% if request.session.is_login %}
+
+    <table class="table table-striped">
+        <caption>
+            <font style="font-size:24px;font-weight:bold;color:#ff0000;">1. 课题组列表</font>
+        </caption>
+
+        <thead>
+            <tr>
+                <th>group_id</th>
+                <th>group_name</th>
+                <th>topic</th>
+                <th>comment</th>
+                <th>leader_id</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in group_table %}
+            <tr>
+                <td>{{item.group_id}}</td>
+                <td>{{item.group_name}}</td>
+                <td>{{item.topic}}</td>
+                <td>{{item.comment}}</td>
+                <td>{{item.leader_id}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <table class="table table-striped">
+        <caption>
+            <font style="font-size:24px;font-weight:bold;color:#ff0000;">2. 仪器列表</font>
+        </caption>
+
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>type</th>
+                <th>func</th>
+                <th>manager_id</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in Instrument_table %}
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.type }}</td>
+                <td>{{ item.func }}</td>
+                <td>{{ item.manager_id }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <table class="table table-striped">
+        <caption>
+            <font style="font-size:24px;font-weight:bold;color:#ff0000;">3. 教师列表</font>
+        </caption>
+
+        <thead>
+            <tr>
+                <th>teacher_id</th>
+                <th>password</th>
+                <th>name</th>
+                <th>school</th>
+                <th>department</th>
+                <th>email</th>
+                <th>phone</th>
+                <th>comment</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in teacher_table %}
+            <tr>
+                <td>{{ item.teacher_id }}</td>
+                <td>{{ item.password }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.school }}</td>
+                <td>{{ item.department }}</td>
+                <td>{{ item.email }}</td>
+                <td>{{ item.phone }}</td>
+                <td>{{ item.comment }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <table class="table table-striped">
+        <caption>
+            <font style="font-size:24px;font-weight:bold;color:#ff0000;">4. 学生列表</font>
+        </caption>
+
+        <thead>
+            <tr>
+                <th>student_id</th>
+                <th>password</th>
+                <th>name</th>
+                <th>school</th>
+                <th>department</th>
+                <th>major</th>
+                <th>grade</th>
+                <th>email</th>
+                <th>phone</th>
+                <th>comment</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in student_table %}
+            <tr>
+                <td>{{ item.student_id }}</td>
+                <td>{{ item.password }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.school }}</td>
+                <td>{{ item.department }}</td>
+                <td>{{ item.major }}</td>
+                <td>{{ item.grade }}</td>
+                <td>{{ item.email }}</td>
+                <td>{{ item.phone }}</td>
+                <td>{{ item.comment }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <table class="table table-striped">
+        <caption>
+            <font style="font-size:24px;font-weight:bold;color:#ff0000;">5. Group-Teacher-Student关系表</font>
+        </caption>
+
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>comment</th>
+                <th>group_id</th>
+                <th>student_id</th>
+                <th>teacher_id</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in GroupTeacherStudent_table %}
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.comment }}</td>
+                <td>{{ item.group_id }}</td>
+                <td>{{ item.student_id }}</td>
+                <td>{{ item.teacher_id }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <table class="table table-striped">
+        <caption>
+            <font style="font-size:24px;font-weight:bold;color:#ff0000;">6. 预约表</font>
+        </caption>
+
+        <thead>
+            <tr>
+                <th>app_id</th>
+                <th>app_datetime</th>
+                <th>use_date</th>
+                <th>use_time</th>
+                <th>state</th>
+                <th>comment</th>
+                <th>ins_id_id</th>
+                <th>user_id_id</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in appointment_table %}
+            <tr>
+                <td>{{ item.app_id }}</td>
+                <td>{{ item.app_datetime }}</td>
+                <td>{{ item.use_date }}</td>
+                <td>{{ item.use_time }}</td>
+                <td>{{ item.state }}</td>
+                <td>{{ item.comment }}</td>
+                <td>{{ item.ins_id_id }}</td>
+                <td>{{ item.user_id_id }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <table class="table table-striped">
+        <caption>
+            <font style="font-size:24px;font-weight:bold;color:#ff0000;">7. 申请记录回执表</font>
+        </caption>
+
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>approve_status</th>
+                <th>group_id_id</th>
+                <th>student_id_id</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in Application_For_Group_table %}
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.approve_status }}</td>
+                <td>{{ item.group_id_id }}</td>
+                <td>{{ item.student_id_id }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <table class="table table-striped">
+        <caption>
+            <font style="font-size:24px;font-weight:bold;color:#ff0000;">8. 仪器管理员列表</font>
+        </caption>
+
+        <thead>
+            <tr>
+                <th>manager_id</th>
+                <th>password</th>
+                <th>name</th>
+                <th>email</th>
+                <th>phone</th>
+                <th>comment</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in InstrumentManager_table %}
+            <tr>
+                <td>{{ item.manager_id }}</td>
+                <td>{{ item.password }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.email }}</td>
+                <td>{{ item.phone }}</td>
+                <td>{{ item.comment }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% endif %}
+</body>
+
+</html>

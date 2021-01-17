@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>管理员查看仪器</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <link rel="stylesheet" href="/static/css/font.css">
+    <link rel="stylesheet" href="/static/css/xadmin.css">
+    <script src="/static/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/static/js/xadmin.js"></script>
+    <style>
+    .fakeimg {
+      height: 200px;
+      background: #aaa;
+    }
+
+    .django_img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .main_box h3 {
+        border-left: solid 4px #ae0a29;
+        font-size: 18px;
+        color: #333;
+        line-height: 18px;
+        text-indent: 8px;
+    }
+  </style>
+</head>
+
+<body>
+
+
+<!--<table class="table table-striped">
+    <thead>
+      <tr>
+        <th>仪器ID</th>
+        <th>仪器名称</th>
+        <th>仪器状态</th>
+        <th>仪器生产商</th>
+        <th>仪器型号</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in manager_instruments %}
+      <tr>
+        <td>{{i.id}}</td>
+        <td>{{i.name}}</td>
+        <td>{{i.state}}</td>
+        <td>{{i.manufacturer}}</td>
+        <td>{{i.type}}</td>
+        <td>
+          <button type="button" class="btn btn-danger btn-instrument_time_table" button_of_instrument="{{i.id}}" >月周表</button>
+          <button type="button" class="btn btn-danger btn-update_instrument" button_of_instrument="{{i.id}}">修改</button>
+          <button type="button" class="btn btn-default btn-delete_instrument" button_of_instrument="{{i.id}}">删除</button>
+        </td> 
+      </tr>
+      {% endfor %}
+    </tbody>
+</table>-->
+<div class="layui-fluid">
+  <div class="layui-row layui-col-space15">
+      <div class="layui-col-md12">
+          <div class="layui-card">
+              <div class="layui-card-body ">
+                <br>
+                <div class="main_box">
+                  <h3> 仪器管理 </h3>
+                </div>
+                <br>
+                  <form class="layui-form layui-col-space5">
+                      <div class="layui-inline layui-show-xs-block">
+                          <input class="layui-input" autocomplete="off" placeholder="仪器ID" name="start" id="start"></div>
+                      <div class="layui-inline layui-show-xs-block">
+                          <input class="layui-input" autocomplete="off" placeholder="仪器名" name="end" id="end"></div>
+                      <div class="layui-inline layui-show-xs-block">
+                          <input type="text" name="username" placeholder="仪器型号" autocomplete="off" class="layui-input"></div>
+                      <div class="layui-inline layui-show-xs-block">
+                          <button class="layui-btn" lay-submit="" lay-filter="sreach">
+                              <i class="layui-icon">&#xe615;</i></button>
+                      </div>
+                  </form>
+              </div>
+              <!-- 搜索框结束 -->
+
+              <div class="layui-card-body ">
+                  <table class="layui-table" lay-filter="test">
+                    <thead>
+                      <tr>
+                        <th>仪器ID</th>
+                        <th>仪器名称</th>
+                        <th>仪器状态</th>
+                        <th>仪器生产商</th>
+                        <th>仪器型号</th>
+                        <th>仪器使用情况</th>
+                        <th>仪器修改</th>
+                        <th>仪器删除</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for i in manager_instruments %}
+                      <tr>
+                        <td>{{i.id}}</td>
+                        <td>{{i.name}}</td>
+                        <td>{{i.state}}</td>
+                        <td>{{i.manufacturer}}</td>
+                        <td>{{i.type}}</td>
+                        <td>
+                          <button type="button" class="layui-btn btn-instrument_time_table" button_of_instrument="{{i.id}}">月周表</button>
+                        </td>
+                        <td>
+                          <button type="button" class="layui-btn layui-btn-warm btn-update_instrument" button_of_instrument="{{i.id}}">修改</button>
+                        </td>
+                        <td>  
+                          <button type="button" class="layui-btn layui-btn-danger btn-delete_instrument" button_of_instrument="{{i.id}}">删除</button>
+                        </td> 
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+</body>
+
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script>
+    $(".btn-delete_instrument").click(function(){
+        _id = $(this).attr("button_of_instrument")
+        $.ajax({
+        type:"GET",
+        contentType:"application/json;charset=UTF-8",
+        url:"/Manager/"+window.location.pathname.match(/\d+/g)+"/delete_instrument",
+        data:{
+            id:_id,
+        },
+        success:function(result){
+            console.log("success!")
+            console.log(result)
+            alert("删除仪器成功！")
+            window.location.reload()
+            /*
+            $.ajax({
+              url:"/Manager/"+window.location.pathname.match(/\d+/g)+"/instrument_list",
+              data:{
+                  
+              },
+              type:'get',
+              datatype:"html",
+              success:function (data) {
+                  $("#main_content").html(data)
+              }
+            })*/
+        },
+        error:function(e){
+            console.log(e.status);
+            console.log(e.responseText);
+        }
+        })
+    })
+</script>
+
+{% include 'manager/manager_update_instrument.html' %}
+<script>
+  function get_instrument_detail_information(data){
+      console.log(data);
+        $.ajax({
+            type:"GET",
+            contentType:"application/json;charset=UTF-8",
+            url:"/Manager/"+window.location.pathname.match(/\d+/g)+"/get_instrument_detail_information",
+            data:{
+              "ins_id":data.ins_id,
+            },
+            success:function(result){
+              console.log("success!")
+              console.log(result.name)//仪器名称
+              var name_content=document.getElementById("instrument_name");
+              name_content.innerHTML=result.name;
+
+              console.log(result.state)//仪器状态
+              var state_content=document.getElementById("instrument_state");
+              state_content.innerHTML=result.state;
+
+              console.log(result.address)//仪器地址
+              var address_content=document.getElementById("instrument_address");
+              address_content.innerHTML=result.address;
+
+              console.log(result.manufacturer)//生产商
+              var manufacturer_content=document.getElementById("instrument_manufacturer");
+              manufacturer_content.innerHTML=result.manufacturer;
+
+              console.log(result.type)//型号
+              var type_content=document.getElementById("instrument_type");
+              type_content.innerHTML=result.type;
+
+              console.log(result.purchaseDate)//购买日期
+              var purchaseDate_content=document.getElementById("instrument_purchase_date");
+              purchaseDate_content.innerHTML=result.purchaseDate;
+
+              console.log(result.technicalParameters)//技术参数
+              var technicalParameters_content=document.getElementById("instrument_technical_parameters");
+              technicalParameters_content.innerHTML=result.technicalParameters;
+
+              console.log(result.func)//主要功能
+              var function_content=document.getElementById("instrument_function");
+              function_content.innerHTML=result.func;
+
+              console.log(result.picture)//仪器图片
+              var picture_content=document.getElementById("instrument_picture");
+              picture_content.innerHTML=result.picture;
+            },
+            error:function(e){
+              console.log(e.status);
+              console.log(e.responseText);
+            }
+        })
+    }
+
+    function save_update(event){
+      var _ins_id = event.data.ins_id;
+      var new_name_content = $("#instrument_name").val();
+      var new_state_content = $("#instrument_state").val();
+      var new_type_content = $("#instrument_type").val();
+      var new_address_content = $("#instrument_address").val();
+      var new_manufacturer_content = $("#instrument_manufacturer").val();
+      var new_technicalParameters_content=$("#instrument_technical_parameters").val();
+      var new_purchaseDate_content=$("#instrument_purchase_date").val();
+      var new_function_content=$("#instrument_function").val();
+      var new_picture_content=$("#instrument_picture").val();
+      $.ajax({
+          type:"GET",
+          contentType:"application/json;charset=UTF-8",
+          url:"/Manager/"+window.location.pathname.match(/\d+/g)+"/update_instrument_information",
+          data:{
+              ins_id:_ins_id,
+              new_name:new_name_content,
+              new_state:new_state_content,
+              new_type:new_type_content,
+              new_address:new_address_content,
+              new_manufacturer:new_manufacturer_content,
+              new_technicalParameters:new_technicalParameters_content,
+              new_purchaseDate:new_purchaseDate_content,
+              new_function:new_function_content,
+              new_picture:new_picture_content,
+          },
+          success:function(result){
+              console.log("success!")
+              console.log(result)
+              alert("修改仪器信息成功！")
+              window.location.reload()
+              /*
+              $.ajax({
+                url:"/Manager/"+window.location.pathname.match(/\d+/g)+"/instrument_list",
+                data:{
+                    
+                },
+                type:'get',
+                datatype:"html",
+                success:function (data) {
+                    $("#main_content").html(data)
+                }
+              })*/
+          },
+          error:function(e){
+              console.log(e.status);
+              console.log(e.responseText);
+          }
+          })
+    }
+
+    $(".btn-update_instrument").click(function(){
+      jQuery.noConflict();
+      $("#update_instrument_information").modal("show");
+      var _ins_id = $(this).attr("button_of_instrument");
+      var data = {ins_id:_ins_id};
+      get_instrument_detail_information(data);
+      $("#instrument_update_save").click(data,save_update);
+    })
+
+    $(".btn-instrument_time_table").click(function(){
+      var ins_id = $(this).attr("button_of_instrument");
+      window.open("../"+ins_id+"/ins_time");
+    })
+
+</script>
+
+
+</html>

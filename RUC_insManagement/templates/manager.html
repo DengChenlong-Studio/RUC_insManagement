@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+          content="Responsive sidebar template with sliding effect and dropdown menu based on bootstrap 3">
+    <title>{{manager_name}}</title>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}">
+    </script>
+    <script src="{% static 'js/js.cookie.min.js'%}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}">
+    </script>
+    <script src="{% static 'js/ace/ace.js'%}"></script>
+    <script src="{% static 'js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+    <script src="{% static 'js/main_project.js' %}"></script>
+    <script src="{% static 'js/jquery.range-min.js'%}"></script>
+
+
+<script src="{% static 'js/pdf.js'%}"></script>
+<script src="{% static 'js/main.js'%}"></script>
+<script src="{% static 'js/export.js'%}"></script>
+
+    <!-- using online links -->
+    <link rel="stylesheet" href="{% static 'css/jquery.range.css'%}"/>
+    <link rel="stylesheet" href="{% static 'css/jquery.mCustomScrollbar.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'css/all_project.css'%}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <!-- using local links -->
+    <!-- <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="../node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css"> -->
+
+    <link rel="stylesheet" href="{% static 'css/main_project.css' %}?v=1">
+    <link rel="stylesheet" href="{% static 'css/sidebar-themes.css' %}?v=1">
+
+     <link rel="stylesheet" href="{% static 'css/base.min.css'%}"/>
+    <link rel="stylesheet" href="{% static 'css/fancy.min.css'%}"/>
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css'%}"/>
+
+    <link rel="stylesheet" href="{% static 'css/style.min.css'%}"/>
+    <link rel="stylesheet" href="{% static 'css/text_layer_builder.css'%}"/>
+    <link rel="stylesheet" href="{% static 'css/annotation_layer_builder.css'%}"/>
+
+    
+    
+
+
+    <style type="text/css">
+        .col-lg-half {
+            width: 1%;
+            float: left;
+            position: relative;
+            min-height: 1px;
+            padding-right: 10px;
+            padding-left: 10px;
+            box-sizing: border-box;
+        }
+
+        #unpin-btn {
+            cursor: pointer;
+        }
+
+        .active_rel {
+            color: #932793;
+        }
+
+        .editor {
+            margin: 0;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+        .pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover {
+            background-color: #29a32b;
+            border-color: #29a32b;
+        }
+
+        .pagination > li > a, .pagination > li > span {
+            position: relative;
+            float: left;
+            padding: 6px 12px;
+            margin-left: -1px;
+            line-height: 1.42857143;
+            color: #29a32b;
+            text-decoration: none;
+            background-color: #fff;
+            border: 1px solid #ddd;
+        }
+
+        .btn-primary {
+            color: #fff;
+            background-color: #29a32b;
+            border-color: #29a32b;
+        }
+
+        .btn-circle {
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            padding: 6px 0;
+            font-size: 12px;
+            line-height: 1.428571429;
+            border-radius: 15px;
+        }
+        #title_name {
+            padding: 1rem 1.2rem;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            height: 55px;
+            text-transform: uppercase;
+            font-weight: bold;
+            -webkit-box-flex: 1;
+            -ms-flex-positive: 1;
+            flex-grow: 1;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    </style>
+    
+</head>
+
+<body>
+<div class="page-wrapper light-theme sidebar-bg bg4 toggled boder-radius-on">
+    <nav id="sidebar" class="sidebar-wrapper">
+        <div class="sidebar-content">
+            <!-- sidebar-brand  -->
+            
+            <div class="sidebar-item sidebar-header d-flex flex-nowrap">
+                
+                <br><br>
+            </div>
+            <!-- sidebar-header  -->
+            <!-- sidebar-search  -->
+            <!-- sidebar-menu  -->
+            <div class=" sidebar-item sidebar-menu">
+                <ul>
+                    <li class="header-menu">
+                        <span>个人信息管理</span>
+                    </li>
+                    <li class="">
+                        <a href="javascript:void(0)" data-target="#tab-info" data-toggle="tab" id="myinfo">
+                            <!--<i class="fa fa-database"></i>-->
+                            <span class="menu-text">个人信息</span>
+                        </a>
+                    </li>
+                    <li class="header-menu">
+                        <span>仪器管理</span>
+                    </li>
+                    <li class="">
+                        <a href="javascript:void(0)" data-target="#tab-createinstrument" data-toggle="tab" id="createinstrument">
+                            <!--<i class="fa fa-database"></i>-->
+                            <span class="menu-text">创建仪器</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="javascript:void(0)" data-target="#tab-myinstrumentlist" data-toggle="tab" id="myinstrumentlist">
+                            <!--<i class="fa fa-leaf"></i>-->
+                            <span class="menu-text">我管理的仪器列表</span>
+                        </a>
+                    </li>
+                    <li class="header-menu">
+                        <span>仪器预约管理</span>
+                    </li>
+                    <li class="">
+                        <a href="javascript:void(0)" data-target="#tab-myappointmentlist" data-toggle="tab" id="myappointmentlist">
+                            <!--<i class="far fa-user-circle"></i>-->
+                            <span class="menu-text">我收到的预约</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- sidebar-menu  -->
+        </div>
+        <!-- sidebar-footer  -->
+    </nav>
+    <!-- page-content  -->
+    <main class="page-content">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <br>
+            </div>
+            <div class="navbar navbar-default">  
+                <a class="navbar-brand" style="float: left;">中国人民大学大型仪器预约管理系统</a>
+
+                <!-- Brand and toggle get grouped for better mobile display -->
+                
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <div class="sidebar-item sidebar-brand">
+                                <a id="title_name" href="javascript:void(0)">{{manager_name}}</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+
+            </div>
+        </div>
+        <div class="row">
+            <table class="table table-striped">
+                <tr></tr>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col-lg-half"></div>
+            <div class="col-lg-10">
+                <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane fade in active" id="tab-default">
+                        {{manager_name}}管理员，欢迎使用中国人民大学仪器预约管理界面！
+                    </div>
+                    <div class="tab-pane fade" id="tab-info">
+                        <div id="infohtml">
+                            <!--管理员个人信息，已完成-->
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="tab-createinstrument">
+                        <div id="createinstrumenthtml">
+                            <!--创建仪器，已完成-->
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="tab-myinstrumentlist">
+                        <div id="myinstrumentlisthtml">
+                            <!--查看自己管理的仪器列表，已完成-->
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="tab-myappointmentlist">
+                        <div id="myappointmentlisthtml">
+                            <!--处理预约界面，已完成-->
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane fade" id="tab-file">
+                        <!--todo -->
+                        <button class="btn btn-default btn-circle" onclick="javascript:refresh_file_view()"
+                                data-toggle="tooltip" data-placement="top" title="refresh the file list"><span
+                                class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
+                        <div id="file_list"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-1"></div>
+</div>
+</main>
+<!-- page-content" -->
+</div>
+
+
+
+<!-- using online scripts -->
+
+
+
+<script type="text/javascript">
+    var manager_name = '{{manager_name}}'
+    var short_name = '{{short_name}}'
+    var project_id = '{{short_name}}'
+    
+
+
+        //管理员创建仪器
+       $("#createinstrument").click(function(){
+        $.ajax({
+        url:"/Manager/"+window.location.pathname.match(/\d+/g)+"/create_instrument_html",
+        data:{
+            
+        },
+        type:'get',
+        datatype:"html",
+        success:function (data) {
+            $("#createinstrumenthtml").html(data)
+        }
+    })
+       })
+       //管理员查看自己管理的仪器
+       $("#myinstrumentlist").click(function(){
+        $.ajax({
+        url:"/Manager/"+window.location.pathname.match(/\d+/g)+"/instrument_list",
+        data:{
+            
+        },
+        type:'get',
+        datatype:"html",
+        success:function (data) {
+            $("#myinstrumentlisthtml").html(data)
+        }
+    })
+       })
+       //查看收到的预约
+       $("#myappointmentlist").click(function(){
+        $.ajax({
+        url:"/Manager/"+window.location.pathname.match(/\d+/g)+"/applist",
+        data:{
+            
+        },
+        type:'get',
+        datatype:"html",
+        success:function (data) {
+            $("#myappointmentlisthtml").html(data)
+        }
+    })
+       })
+
+       //查看个人信息
+       $("#myinfo").click(function(){
+        $.ajax({
+            url:"/Manager/"+window.location.pathname.match(/\d+/g)+"/getinfo",
+            data:{
+
+            },
+            type:'get',
+            datatype:"html",
+            success:function (data){
+                $("#infohtml").html(data)
+            }
+        })
+       })
+    
+  
+</script>
+
+
+
+</body>
+
+</html>

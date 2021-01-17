@@ -1,0 +1,39 @@
+*{
+  margin:0;
+  padding:0;
+}
+nav{
+  width: 720px;
+  height: 405px;
+  margin:20px auto;
+  overflow: hidden;
+  position: relative;
+}
+#index{
+  position: absolute;
+  left:320px;
+  bottom: 20px;
+
+}
+#index li{
+  width:8px;
+  height: 8px;
+  border: solid 1px gray;
+  border-radius: 100%;
+  background-color: #eee;
+  display: inline-block;
+}
+#img{
+  width: 3600px;/*不给宽高无法移动*/
+  height: 405px;
+  position: absolute;/*不定义absolute，js无法设置left和top*/
+  z-index: -1;
+}
+#img li{
+  width: 720px;
+  height: 405px;
+  float: left;
+}
+#index .on{
+  background-color: black;
+}

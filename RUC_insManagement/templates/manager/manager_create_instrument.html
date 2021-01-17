@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>新增仪器界面</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <link rel="stylesheet" href="/static/css/font.css">
+    <link rel="stylesheet" href="/static/css/xadmin.css">
+    <script src="/static/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/static/js/xadmin.js"></script>
+    <style>
+    .fakeimg {
+      height: 100px;
+      background: #aaa;
+    }
+    .layui-form-label {
+            width: 200px !important;
+            text-align: center !important;
+        }
+ 
+    .layui-input-block {
+        margin-left: 200px !important;
+    }
+    .django_img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .main_box h3 {
+        border-left: solid 4px #ae0a29;
+        font-size: 18px;
+        color: #333;
+        line-height: 18px;
+        text-indent: 8px;
+    }
+  </style>
+</head>
+
+<body>
+
+
+<div class="layui-fluid">
+  <div class="layui-card-body ">
+    <br>
+    <div class="main_box">
+      <h3> 创建仪器 </h3>
+    </div>
+    <br>
+  <form class="layui-form" pane action="">
+    <div class="layui-form-item layui-form-text">
+      <label class="layui-form-label">仪器名称</label>
+      <div class="layui-input-block">
+        <input type="text" class="layui-input" id="manager_instrument_name" name="instrument_name" placeholder="仪器名称"><br>
+      </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+      <label class="layui-form-label">仪器地址</label>
+      <div class="layui-input-block">
+        <input type="text" class="layui-input" id="manager_instrument_address" name="instrument_address" placeholder="仪器地址"><br>
+      </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+      <label class="layui-form-label">仪器状态</label>
+      <div class="layui-input-block">
+        <input type="text" class="layui-input" id="manager_instrument_state" name="instrument_state" placeholder="仪器状态"><br>
+      </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+      <label class="layui-form-label">仪器生产商</label>
+      <div class="layui-input-block">
+        <input type="text" class="layui-input" id="manager_instrument_manufacturer" name="instrument_manufacturer" placeholder="仪器生产商"><br>
+      </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+      <label class="layui-form-label">仪器型号</label>
+      <div class="layui-input-block">
+        <input type="text" class="layui-input" id="manager_instrument_type" name="instrument_type" placeholder="仪器型号"><br>
+      </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+      <label class="layui-form-label">仪器技术参数</label>
+      <div class="layui-input-block">
+        <input type="text" class="layui-input" id="manager_instrument_technicalParameters" name="instrument_technicalParameters" placeholder="仪器技术参数"><br>
+      </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+      <label class="layui-form-label">仪器功能</label>
+      <div class="layui-input-block">
+        <input type="text" class="layui-input" id="manager_instrument_function" name="instrument_function" placeholder="仪器功能"><br>
+      </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+      <label class="layui-form-label">仪器图片</label>
+      <div class="layui-input-block">
+        <input type="text" class="layui-input" id="manager_instrument_picture" name="instrument_picture" placeholder="这里应该为文件上传功能，还需要改"><br>
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <div class="layui-input-block">
+        <button type="button" class="layui-btn layui-btn-danger btn-create_instrument">创建</button>
+      </div>
+    </div>
+  </form>
+  <br>
+</div>
+</div>
+
+</body>
+
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script>
+  // console.log("?")
+  $(".btn-create_instrument").click(function(){
+      // _cno = $(this).attr("cno")
+      _instrument_name = $("#manager_instrument_name").val()
+      _instrument_state = $("#manager_instrument_state").val()
+      _instrument_address = $("#manager_instrument_address").val()
+      _instrument_type = $("#manager_instrument_type").val()
+      _instrument_manufacturer = $("#manager_instrument_manufacturer").val()
+      _instrument_function = $("#manager_instrument_function").val()
+      _instrument_technicalParameters = $("#manager_instrument_technicalParameters").val()
+      _instrument_picture = $("#manager_instrument_picture").val() //目前用字符串实现，后续需要改
+      $.ajax({
+      type:"GET",
+      contentType:"application/json;charset=UTF-8",
+      url:"/Manager/"+window.location.pathname.match(/\d+/g)+"/create_instrument",
+      data:{
+          instrument_name:_instrument_name,
+          instrument_state:_instrument_state,
+          instrument_address:_instrument_address,
+          instrument_type:_instrument_type,
+          instrument_manufacturer:_instrument_manufacturer,
+          instrument_function:_instrument_function,
+          instrument_technicalParameters:_instrument_technicalParameters,
+          instrument_picture:_instrument_picture //目前用字符串实现，后续需要改
+      },
+      success:function(result){
+          console.log("success!")
+          console.log(result)
+          alert("新增仪器成功！")
+          window.location.reload()
+          /*
+          $.ajax({
+              url:"/Manager/"+window.location.pathname.match(/\d+/g)+"/create_instrument_html",
+              data:{
+                  
+              },
+              type:'get',
+              datatype:"html",
+              success:function (data) {
+              $("#main_content").html(data)
+          }
+        })*/
+      },
+      error:function(e){
+          console.log(e.status);
+          console.log(e.responseText);
+      }
+      })
+  })
+</script>
+
+
+</html>
