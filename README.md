@@ -37,25 +37,34 @@
 
 
 ## 三、综合设计
+### 3.1. 登录首页（首页信息及轮播图等）
+![image](https://github.com/DengChenlong-Studio/RUC_insManagement/blob/master/readme_img/homepage.JPG)
 
-### 3.1. E-R图
+
+### 3.2. E-R图
 
 本项目的设计中主要有学生、老师、管理员三种角色，他们的关系可以由以下E-R图来展示：
 ![image](https://github.com/DengChenlong-Studio/RUC_insManagement/blob/master/readme_img/er_pic.png)
 
 
-### 3.2. 登录控制
+### 3.3. 登录控制
 
 登录方面提供了系统账号登录以及微人大登录两种方案，用户可以自由进行选择
+1. 系统账号登录（数据库系统概论小彩蛋~）
+![image](https://github.com/DengChenlong-Studio/RUC_insManagement/blob/master/readme_img/login1.png)
+
+2. 微人大登录
+![image](https://github.com/DengChenlong-Studio/RUC_insManagement/blob/master/readme_img/login2.png)
+
+### 3.4. 仪器预约控制
+
+仪器预约提供了一站式的解决方案，学生用户可以在一个页面中进行仪器查看、仪器预约等操作：
+![image](https://github.com/DengChenlong-Studio/RUC_insManagement/blob/master/readme_img/appointment.JPG)
 
 
 
-### 3.3. 仪器预约控制
+### 3.5. 仪器使用情况查看控制
 
-仪器预约提供了一站式的解决方案，学生用户可以在一个页面中进行仪器查看、仪器预约等操作
+为仪器管理员提供了仪器使用情况的月周日表查看机制，使相应用户能够使用这个功能进行统计以及情况打印：
+![image](https://github.com/DengChenlong-Studio/RUC_insManagement/blob/master/readme_img/statistics.JPG)
 
-
-
-### 3.4. 仪器使用情况查看控制
-
-为仪器管理员提供了仪器使用情况的月周日表查看机制，使相应用户能够使用这个功能进行统计以及情况打印
